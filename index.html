@@ -1,0 +1,6474 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="theme-color" content="#070707">
+<meta name="color-scheme" content="dark">
+<meta name="robots" content="index,follow">
+
+<title>BGDN MOTION — Automotive Visual Archive</title>
+
+<meta name="description"
+content="BGDN MOTION — автомобильный визуальный архив: автомобили, история брендов, редкие машины, дизайн, культура и движение.">
+
+<link rel="preconnect" href="https://commons.wikimedia.org">
+<link rel="preconnect" href="https://upload.wikimedia.org">
+
+<style>
+:root{
+  --bg:#070707;
+  --bg2:#0b0b0b;
+  --card:#101010;
+  --card2:#151515;
+  --line:#252525;
+  --text:#f2f2f2;
+  --muted:#8c8c8c;
+  --muted2:#5e5e5e;
+  --red:#e10600;
+  --white:#fff;
+  --max:1440px;
+  --radius:18px;
+  --header:74px;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+  background:var(--bg);
+}
+
+body{
+  min-height:100vh;
+  overflow-x:hidden;
+  background:
+    radial-gradient(circle at 50% -10%,rgba(225,6,0,.08),transparent 35%),
+    var(--bg);
+  color:var(--text);
+  font-family:
+    Inter,
+    -apple-system,
+    BlinkMacSystemFont,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
+  line-height:1.5;
+}
+
+body.no-scroll{
+  overflow:hidden;
+}
+
+img{
+  display:block;
+  max-width:100%;
+}
+
+button,
+input,
+textarea{
+  font:inherit;
+}
+
+button{
+  border:0;
+}
+
+a{
+  color:inherit;
+  text-decoration:none;
+}
+
+section{
+  scroll-margin-top:95px;
+}
+
+::selection{
+  background:var(--red);
+  color:#fff;
+}
+
+/* =========================
+   SCROLL PROGRESS
+========================= */
+
+#scrollProgress{
+  position:fixed;
+  z-index:10000;
+  top:0;
+  left:0;
+  width:0;
+  height:3px;
+  background:var(--red);
+}
+
+/* =========================
+   LOADER
+========================= */
+
+#loader{
+  position:fixed;
+  inset:0;
+  z-index:9999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:#070707;
+  transition:
+    opacity .5s ease,
+    visibility .5s ease;
+}
+
+#loader.hidden{
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+}
+
+.loader-inner{
+  width:min(360px,80vw);
+}
+
+.loader-brand{
+  margin-bottom:18px;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.35em;
+  text-align:center;
+}
+
+.loader-line{
+  width:100%;
+  height:1px;
+  overflow:hidden;
+  background:#252525;
+}
+
+.loader-line span{
+  display:block;
+  width:0;
+  height:100%;
+  background:var(--red);
+  animation:loader 1.5s ease forwards;
+}
+
+@keyframes loader{
+  to{width:100%}
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.site-header{
+  position:fixed;
+  z-index:5000;
+  top:0;
+  left:0;
+  right:0;
+  height:var(--header);
+  display:flex;
+  align-items:center;
+  background:rgba(7,7,7,.82);
+  border-bottom:1px solid rgba(255,255,255,.06);
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+}
+
+.header-inner{
+  width:min(var(--max),calc(100% - 40px));
+  height:100%;
+  margin:auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:30px;
+}
+
+.logo{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-shrink:0;
+}
+
+.logo-mark{
+  width:10px;
+  height:10px;
+  background:var(--red);
+  transform:rotate(45deg);
+}
+
+.logo-text{
+  font-size:14px;
+  font-weight:900;
+  letter-spacing:.22em;
+}
+
+.logo-sub{
+  color:var(--muted);
+  font-size:8px;
+  letter-spacing:.2em;
+  margin-top:2px;
+}
+
+.main-nav{
+  display:flex;
+  align-items:center;
+  gap:26px;
+}
+
+.main-nav a{
+  position:relative;
+  color:#a7a7a7;
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.13em;
+  text-transform:uppercase;
+  transition:color .2s ease;
+}
+
+.main-nav a::after{
+  content:"";
+  position:absolute;
+  right:0;
+  bottom:-8px;
+  left:0;
+  height:1px;
+  background:var(--red);
+  transform:scaleX(0);
+  transform-origin:right;
+  transition:transform .25s ease;
+}
+
+.main-nav a:hover{
+  color:#fff;
+}
+
+.main-nav a:hover::after{
+  transform:scaleX(1);
+  transform-origin:left;
+}
+
+.header-actions{
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+
+.icon-button{
+  width:40px;
+  height:40px;
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+  color:#fff;
+  background:#101010;
+  border:1px solid var(--line);
+  border-radius:50%;
+  transition:
+    background .2s ease,
+    border-color .2s ease,
+    transform .2s ease;
+}
+
+.icon-button:hover{
+  background:#181818;
+  border-color:#444;
+  transform:translateY(-1px);
+}
+
+.icon-button svg{
+  width:17px;
+  height:17px;
+  fill:none;
+  stroke:currentColor;
+  stroke-width:1.6;
+}
+
+.mobile-toggle{
+  display:none;
+}
+
+/* =========================
+   SEARCH
+========================= */
+
+.search-overlay{
+  position:fixed;
+  z-index:4900;
+  inset:0;
+  padding:120px 20px 40px;
+  background:rgba(5,5,5,.97);
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition:
+    opacity .25s ease,
+    visibility .25s ease;
+  overflow:auto;
+}
+
+.search-overlay.open{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+}
+
+.search-wrap{
+  width:min(900px,100%);
+  margin:auto;
+}
+
+.search-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  margin-bottom:30px;
+}
+
+.search-label{
+  color:var(--muted);
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.25em;
+  text-transform:uppercase;
+}
+
+.search-close{
+  color:#fff;
+  background:none;
+  cursor:pointer;
+  font-size:28px;
+  line-height:1;
+}
+
+.search-input{
+  width:100%;
+  padding:20px 0;
+  color:#fff;
+  background:transparent;
+  border:0;
+  border-bottom:1px solid #333;
+  outline:0;
+  font-size:clamp(28px,5vw,56px);
+  font-weight:700;
+}
+
+.search-input::placeholder{
+  color:#333;
+}
+
+.search-results{
+  display:grid;
+  gap:8px;
+  margin-top:25px;
+}
+
+.search-result{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  padding:18px;
+  background:#0d0d0d;
+  border:1px solid #1d1d1d;
+  cursor:pointer;
+  transition:border-color .2s ease;
+}
+
+.search-result:hover{
+  border-color:#444;
+}
+
+.search-result-name{
+  font-weight:700;
+}
+
+.search-result-meta{
+  color:var(--muted);
+  font-size:10px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+/* =========================
+   MOBILE PANEL
+========================= */
+
+.mobile-panel{
+  position:fixed;
+  z-index:4800;
+  top:var(--header);
+  right:0;
+  left:0;
+  padding:20px;
+  background:rgba(7,7,7,.98);
+  border-bottom:1px solid #222;
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transform:translateY(-10px);
+  transition:
+    opacity .25s ease,
+    visibility .25s ease,
+    transform .25s ease;
+}
+
+.mobile-panel.open{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+  transform:translateY(0);
+}
+
+.mobile-nav{
+  display:grid;
+  gap:4px;
+}
+
+.mobile-nav a{
+  padding:15px 5px;
+  border-bottom:1px solid #1c1c1c;
+  color:#ddd;
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+}
+
+/* =========================
+   GLOBAL
+========================= */
+
+.container{
+  width:min(var(--max),calc(100% - 40px));
+  margin:auto;
+}
+
+.section{
+  padding:110px 0;
+}
+
+.section-head{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:30px;
+  margin-bottom:42px;
+}
+
+.section-kicker{
+  margin-bottom:10px;
+  color:var(--red);
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.28em;
+  text-transform:uppercase;
+}
+
+.section-title{
+  font-size:clamp(30px,5vw,62px);
+  line-height:.95;
+  letter-spacing:-.045em;
+}
+
+.section-description{
+  max-width:470px;
+  color:var(--muted);
+  font-size:14px;
+}
+
+.section-number{
+  color:#333;
+  font-size:11px;
+  font-weight:800;
+  letter-spacing:.2em;
+}
+
+/* =========================
+   HERO
+========================= */
+
+.hero{
+  position:relative;
+  min-height:100svh;
+  padding-top:var(--header);
+  display:flex;
+  align-items:center;
+  overflow:hidden;
+}
+
+.hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(7,7,7,.98) 0%,
+      rgba(7,7,7,.72) 42%,
+      rgba(7,7,7,.1) 100%
+    ),
+    radial-gradient(
+      circle at 75% 50%,
+      rgba(225,6,0,.11),
+      transparent 30%
+    );
+}
+
+.hero-grid{
+  position:relative;
+  z-index:2;
+  width:min(var(--max),calc(100% - 40px));
+  margin:auto;
+  display:grid;
+  grid-template-columns:minmax(0,1fr) minmax(320px,.8fr);
+  align-items:center;
+  gap:50px;
+}
+
+.hero-copy{
+  max-width:800px;
+}
+
+.hero-overline{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:25px;
+  color:#999;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.3em;
+  text-transform:uppercase;
+}
+
+.hero-overline span{
+  width:34px;
+  height:1px;
+  background:var(--red);
+}
+
+.hero-title{
+  max-width:900px;
+  font-size:clamp(58px,10vw,145px);
+  line-height:.82;
+  font-weight:900;
+  letter-spacing:-.075em;
+}
+
+.hero-title span{
+  color:transparent;
+  -webkit-text-stroke:1px #555;
+}
+
+.hero-text{
+  max-width:570px;
+  margin-top:34px;
+  color:#9a9a9a;
+  font-size:15px;
+}
+
+.hero-actions{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  margin-top:32px;
+}
+
+.btn{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  min-height:48px;
+  padding:0 20px;
+  cursor:pointer;
+  border:1px solid #333;
+  font-size:10px;
+  font-weight:900;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  transition:
+    background .2s ease,
+    border-color .2s ease,
+    color .2s ease,
+    transform .2s ease;
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+}
+
+.btn-primary{
+  color:#fff;
+  background:var(--red);
+  border-color:var(--red);
+}
+
+.btn-primary:hover{
+  background:#b90500;
+  border-color:#b90500;
+}
+
+.btn-secondary{
+  color:#fff;
+  background:#101010;
+}
+
+.btn-secondary:hover{
+  background:#181818;
+  border-color:#555;
+}
+
+/* =========================
+   HERO VISUAL
+========================= */
+
+.hero-visual{
+  position:relative;
+  min-height:500px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.hero-orbit{
+  position:absolute;
+  width:min(42vw,570px);
+  aspect-ratio:1;
+  border:1px solid rgba(255,255,255,.08);
+  border-radius:50%;
+  animation:orbitPulse 8s ease-in-out infinite;
+}
+
+.hero-orbit::before,
+.hero-orbit::after{
+  content:"";
+  position:absolute;
+  border:1px solid rgba(225,6,0,.18);
+  border-radius:50%;
+}
+
+.hero-orbit::before{
+  inset:11%;
+}
+
+.hero-orbit::after{
+  inset:23%;
+}
+
+@keyframes orbitPulse{
+  0%,100%{transform:scale(.98) rotate(0deg)}
+  50%{transform:scale(1.02) rotate(8deg)}
+}
+
+.hero-visual-text{
+  position:absolute;
+  z-index:1;
+  color:#252525;
+  font-size:clamp(80px,15vw,220px);
+  font-weight:900;
+  line-height:1;
+  letter-spacing:-.08em;
+  user-select:none;
+}
+
+.hero-red-dot{
+  position:absolute;
+  z-index:2;
+  width:9px;
+  height:9px;
+  background:var(--red);
+  border-radius:50%;
+  box-shadow:0 0 30px rgba(225,6,0,.7);
+}
+
+/* =========================
+   TICKER
+========================= */
+
+.ticker{
+  overflow:hidden;
+  border-top:1px solid #202020;
+  border-bottom:1px solid #202020;
+  background:#0b0b0b;
+}
+
+.ticker-track{
+  display:flex;
+  width:max-content;
+  animation:ticker 28s linear infinite;
+}
+
+.ticker-item{
+  display:flex;
+  align-items:center;
+  gap:35px;
+  padding:16px 35px;
+  white-space:nowrap;
+  color:#777;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.22em;
+  text-transform:uppercase;
+}
+
+.ticker-item b{
+  color:var(--red);
+}
+
+@keyframes ticker{
+  to{transform:translateX(-50%)}
+}
+
+/* =========================
+   LATEST
+========================= */
+
+.latest-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:14px;
+}
+
+.latest-card{
+  position:relative;
+  min-height:440px;
+  overflow:hidden;
+  background:#101010;
+  border:1px solid #1d1d1d;
+  cursor:pointer;
+  contain:layout paint;
+}
+
+.latest-card::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:linear-gradient(
+    180deg,
+    transparent 35%,
+    rgba(0,0,0,.85) 100%
+  );
+  pointer-events:none;
+}
+
+.latest-card-image{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  transition:transform .6s cubic-bezier(.2,.7,.2,1);
+}
+
+.latest-card:hover .latest-card-image{
+  transform:scale(1.045);
+}
+
+.latest-card-content{
+  position:absolute;
+  z-index:2;
+  right:22px;
+  bottom:22px;
+  left:22px;
+}
+
+.latest-tag{
+  display:inline-block;
+  margin-bottom:12px;
+  padding:6px 8px;
+  color:#fff;
+  background:var(--red);
+  font-size:8px;
+  font-weight:900;
+  letter-spacing:.16em;
+}
+
+.latest-card h3{
+  font-size:clamp(22px,2.5vw,34px);
+  line-height:1;
+  letter-spacing:-.035em;
+}
+
+.latest-card p{
+  margin-top:8px;
+  color:#aaa;
+  font-size:11px;
+}
+
+/* =========================
+   PLACEHOLDER
+========================= */
+
+.image-placeholder{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 50% 35%,#1d1d1d,transparent 42%),
+    #0d0d0d;
+}
+
+.image-placeholder::before{
+  content:"";
+  position:absolute;
+  width:65%;
+  height:1px;
+  background:#2d2d2d;
+  transform:rotate(-18deg);
+}
+
+.image-placeholder::after{
+  content:"BGDN";
+  position:absolute;
+  color:#222;
+  font-size:clamp(50px,8vw,120px);
+  font-weight:900;
+  letter-spacing:-.08em;
+}
+
+/* =========================
+   MOTION / 3D
+========================= */
+
+.motion-section{
+  overflow:hidden;
+  background:#090909;
+  border-top:1px solid #171717;
+  border-bottom:1px solid #171717;
+}
+
+.motion-grid{
+  display:grid;
+  grid-template-columns:.8fr 1.2fr;
+  align-items:center;
+  gap:50px;
+}
+
+.motion-copy{
+  max-width:500px;
+}
+
+.motion-copy p{
+  margin-top:20px;
+  color:var(--muted);
+  font-size:14px;
+}
+
+.motion-controls{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:25px;
+}
+
+.paint-button{
+  width:34px;
+  height:34px;
+  cursor:pointer;
+  border:2px solid #333;
+  border-radius:50%;
+  transition:transform .2s ease,border-color .2s ease;
+}
+
+.paint-button:hover{
+  transform:scale(1.08);
+  border-color:#fff;
+}
+
+.paint-button.active{
+  border-color:#fff;
+  box-shadow:0 0 0 2px var(--red);
+}
+
+.motion-stage{
+  position:relative;
+  min-height:540px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.motion-stage::before{
+  content:"";
+  position:absolute;
+  width:75%;
+  aspect-ratio:1;
+  border:1px solid #1f1f1f;
+  border-radius:50%;
+}
+
+.motion-stage::after{
+  content:"";
+  position:absolute;
+  width:55%;
+  height:1px;
+  background:linear-gradient(90deg,transparent,#333,transparent);
+}
+
+model-viewer{
+  position:relative;
+  z-index:2;
+  width:100%;
+  height:540px;
+  --poster-color:transparent;
+  background:transparent;
+}
+
+.model-fallback{
+  position:absolute;
+  z-index:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  width:80%;
+  height:65%;
+  color:#222;
+  font-size:clamp(45px,8vw,100px);
+  font-weight:900;
+  letter-spacing:-.08em;
+}
+
+.model-status{
+  position:absolute;
+  z-index:3;
+  right:15px;
+  bottom:15px;
+  padding:7px 9px;
+  color:#777;
+  background:#0d0d0d;
+  border:1px solid #222;
+  font-size:8px;
+  font-weight:800;
+  letter-spacing:.15em;
+}
+
+/* =========================
+   FILTERS
+========================= */
+
+.filters{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-bottom:28px;
+}
+
+.filter-btn{
+  padding:9px 13px;
+  cursor:pointer;
+  color:#777;
+  background:#0d0d0d;
+  border:1px solid #222;
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  transition:.2s ease;
+}
+
+.filter-btn:hover,
+.filter-btn.active{
+  color:#fff;
+  background:var(--red);
+  border-color:var(--red);
+}
+
+/* =========================
+   MACHINES
+========================= */
+
+.machine-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+
+.machine-card{
+  position:relative;
+  min-width:0;
+  overflow:hidden;
+  background:#0d0d0d;
+  border:1px solid #1e1e1e;
+  cursor:pointer;
+  contain:layout paint;
+  transition:
+    border-color .25s ease,
+    transform .25s ease;
+}
+
+.machine-card:hover{
+  border-color:#444;
+  transform:translateY(-3px);
+}
+
+.machine-image{
+  position:relative;
+  aspect-ratio:16/10;
+  overflow:hidden;
+  background:#101010;
+}
+
+.machine-image img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:0;
+  transition:
+    opacity .4s ease,
+    transform .5s ease;
+}
+
+.machine-image img.loaded{
+  opacity:1;
+}
+
+.machine-card:hover .machine-image img{
+  transform:scale(1.04);
+}
+
+.machine-info{
+  padding:17px;
+}
+
+.machine-brand{
+  margin-bottom:6px;
+  color:var(--red);
+  font-size:8px;
+  font-weight:900;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+}
+
+.machine-name{
+  font-size:18px;
+  font-weight:800;
+  line-height:1.05;
+  letter-spacing:-.025em;
+}
+
+.machine-meta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:7px;
+  margin-top:11px;
+}
+
+.machine-meta span{
+  color:#777;
+  font-size:8px;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+}
+
+.machine-meta span:not(:last-child)::after{
+  content:"/";
+  margin-left:7px;
+  color:#333;
+}
+
+/* =========================
+   LOAD MORE
+========================= */
+
+.center-action{
+  display:flex;
+  justify-content:center;
+  margin-top:30px;
+}
+
+/* =========================
+   LIBRARY
+========================= */
+
+.library-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+}
+
+.library-card{
+  position:relative;
+  aspect-ratio:1/1;
+  overflow:hidden;
+  background:#101010;
+  border:1px solid #1e1e1e;
+  cursor:pointer;
+}
+
+.library-card img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  opacity:0;
+  transition:
+    opacity .4s ease,
+    transform .6s ease;
+}
+
+.library-card img.loaded{
+  opacity:1;
+}
+
+.library-card:hover img{
+  transform:scale(1.05);
+}
+
+.library-overlay{
+  position:absolute;
+  z-index:2;
+  right:15px;
+  bottom:15px;
+  left:15px;
+}
+
+.library-category{
+  color:#999;
+  font-size:8px;
+  font-weight:800;
+  letter-spacing:.17em;
+}
+
+.library-name{
+  margin-top:4px;
+  font-size:19px;
+  font-weight:800;
+}
+
+/* =========================
+   STORIES
+========================= */
+
+.stories-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
+.story-card{
+  min-height:320px;
+  padding:25px;
+  display:flex;
+  flex-direction:column;
+  justify-content:space-between;
+  background:
+    linear-gradient(
+      135deg,
+      #121212,
+      #0c0c0c
+    );
+  border:1px solid #1f1f1f;
+  cursor:pointer;
+  transition:
+    border-color .2s ease,
+    transform .25s ease;
+}
+
+.story-card:hover{
+  border-color:#444;
+  transform:translateY(-3px);
+}
+
+.story-number{
+  color:#333;
+  font-size:30px;
+  font-weight:900;
+  letter-spacing:-.05em;
+}
+
+.story-category{
+  margin-bottom:10px;
+  color:var(--red);
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.2em;
+}
+
+.story-card h3{
+  max-width:400px;
+  font-size:clamp(22px,2.4vw,34px);
+  line-height:1;
+  letter-spacing:-.04em;
+}
+
+.story-card p{
+  margin-top:14px;
+  color:#777;
+  font-size:11px;
+}
+
+/* =========================
+   ARCHIVE
+========================= */
+
+.archive-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+
+.archive-card{
+  min-height:240px;
+  padding:25px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  background:#0d0d0d;
+  border:1px solid #1f1f1f;
+  cursor:pointer;
+  transition:
+    background .25s ease,
+    border-color .25s ease;
+}
+
+.archive-card:hover{
+  background:#121212;
+  border-color:#444;
+}
+
+.archive-code{
+  margin-bottom:auto;
+  color:#333;
+  font-size:12px;
+  font-weight:900;
+  letter-spacing:.2em;
+}
+
+.archive-card h3{
+  font-size:28px;
+  line-height:1;
+  letter-spacing:-.04em;
+}
+
+.archive-card p{
+  margin-top:10px;
+  color:#777;
+  font-size:11px;
+}
+
+/* =========================
+   NEWS
+========================= */
+
+.news-grid{
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+  gap:12px;
+}
+
+.news-feature{
+  min-height:420px;
+  padding:30px;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  background:
+    radial-gradient(
+      circle at 75% 25%,
+      rgba(225,6,0,.15),
+      transparent 30%
+    ),
+    #101010;
+  border:1px solid #202020;
+}
+
+.news-feature h3{
+  max-width:700px;
+  font-size:clamp(30px,5vw,64px);
+  line-height:.93;
+  letter-spacing:-.055em;
+}
+
+.news-list{
+  display:grid;
+  gap:10px;
+}
+
+.news-item{
+  padding:22px;
+  background:#0d0d0d;
+  border:1px solid #1e1e1e;
+}
+
+.news-item-top{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  color:#666;
+  font-size:8px;
+  font-weight:900;
+  letter-spacing:.15em;
+}
+
+.news-item h4{
+  margin-top:14px;
+  font-size:17px;
+  line-height:1.1;
+}
+
+/* =========================
+   ABOUT
+========================= */
+
+.about-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:70px;
+}
+
+.about-large{
+  font-size:clamp(30px,4vw,58px);
+  line-height:.98;
+  letter-spacing:-.055em;
+}
+
+.about-large span{
+  color:var(--red);
+}
+
+.about-copy{
+  color:#858585;
+  font-size:14px;
+}
+
+.about-copy p+p{
+  margin-top:18px;
+}
+
+.about-stats{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:10px;
+  margin-top:30px;
+}
+
+.stat{
+  padding:18px;
+  background:#0d0d0d;
+  border:1px solid #1e1e1e;
+}
+
+.stat strong{
+  display:block;
+  font-size:30px;
+  line-height:1;
+}
+
+.stat span{
+  display:block;
+  margin-top:7px;
+  color:#666;
+  font-size:8px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+/* =========================
+   CONTACT
+========================= */
+
+.contact-grid{
+  display:grid;
+  grid-template-columns:.8fr 1.2fr;
+  gap:60px;
+}
+
+.contact-title{
+  font-size:clamp(40px,6vw,78px);
+  line-height:.9;
+  letter-spacing:-.06em;
+}
+
+.contact-title span{
+  color:var(--red);
+}
+
+.contact-form{
+  display:grid;
+  gap:10px;
+}
+
+.form-field{
+  width:100%;
+  min-height:54px;
+  padding:0 15px;
+  color:#fff;
+  background:#0d0d0d;
+  border:1px solid #242424;
+  outline:none;
+  border-radius:0;
+  transition:border-color .2s ease;
+}
+
+textarea.form-field{
+  min-height:150px;
+  padding-top:15px;
+  resize:vertical;
+}
+
+.form-field:focus{
+  border-color:#555;
+}
+
+.form-field::placeholder{
+  color:#555;
+}
+
+/* =========================
+   FOOTER
+========================= */
+
+.site-footer{
+  padding:35px 0;
+  border-top:1px solid #1d1d1d;
+}
+
+.footer-inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.footer-copy{
+  color:#555;
+  font-size:9px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+.footer-links{
+  display:flex;
+  gap:18px;
+}
+
+.footer-links a{
+  color:#777;
+  font-size:9px;
+  font-weight:800;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+}
+
+.footer-links a:hover{
+  color:#fff;
+}
+
+/* =========================
+   MODALS
+========================= */
+
+.modal{
+  position:fixed;
+  z-index:9000;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  background:rgba(0,0,0,.84);
+  backdrop-filter:blur(12px);
+  -webkit-backdrop-filter:blur(12px);
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition:
+    opacity .25s ease,
+    visibility .25s ease;
+}
+
+.modal.open{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+}
+
+.modal-box{
+  position:relative;
+  width:min(1100px,100%);
+  max-height:90svh;
+  overflow:auto;
+  background:#0c0c0c;
+  border:1px solid #2a2a2a;
+  box-shadow:0 30px 100px rgba(0,0,0,.6);
+}
+
+.modal-close{
+  position:absolute;
+  z-index:5;
+  top:12px;
+  right:12px;
+  width:40px;
+  height:40px;
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+  color:#fff;
+  background:rgba(0,0,0,.7);
+  border:1px solid #333;
+  border-radius:50%;
+  font-size:22px;
+}
+
+.machine-modal-grid{
+  display:grid;
+  grid-template-columns:1.2fr .8fr;
+}
+
+.modal-gallery{
+  min-height:520px;
+  background:#090909;
+}
+
+.modal-gallery img{
+  width:100%;
+  height:100%;
+  min-height:520px;
+  object-fit:cover;
+}
+
+.modal-content{
+  padding:38px;
+}
+
+.modal-kicker{
+  color:var(--red);
+  font-size:9px;
+  font-weight:900;
+  letter-spacing:.2em;
+  text-transform:uppercase;
+}
+
+.modal-title{
+  margin-top:10px;
+  font-size:clamp(32px,5vw,65px);
+  line-height:.9;
+  letter-spacing:-.055em;
+}
+
+.modal-text{
+  margin-top:25px;
+  color:#858585;
+  font-size:13px;
+}
+
+.modal-specs{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-top:25px;
+}
+
+.spec{
+  padding:13px;
+  background:#111;
+  border:1px solid #1e1e1e;
+}
+
+.spec-label{
+  color:#555;
+  font-size:7px;
+  font-weight:800;
+  letter-spacing:.15em;
+  text-transform:uppercase;
+}
+
+.spec-value{
+  margin-top:5px;
+  font-size:13px;
+  font-weight:700;
+}
+
+/* story modal */
+
+.story-modal-content{
+  padding:45px;
+}
+
+.story-modal-content h2{
+  max-width:850px;
+  margin-top:10px;
+  font-size:clamp(35px,6vw,75px);
+  line-height:.9;
+  letter-spacing:-.06em;
+}
+
+.story-modal-text{
+  max-width:800px;
+  margin-top:30px;
+  color:#999;
+  font-size:15px;
+  white-space:pre-line;
+}
+
+/* =========================
+   TOAST
+========================= */
+
+#toast{
+  position:fixed;
+  z-index:9500;
+  right:20px;
+  bottom:20px;
+  max-width:min(400px,calc(100% - 40px));
+  padding:13px 16px;
+  color:#fff;
+  background:#151515;
+  border:1px solid #333;
+  font-size:11px;
+  transform:translateY(20px);
+  opacity:0;
+  pointer-events:none;
+  transition:.25s ease;
+}
+
+#toast.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* =========================
+   REVEAL
+========================= */
+
+.reveal{
+  opacity:0;
+  transform:translateY(22px);
+  transition:
+    opacity .7s ease,
+    transform .7s cubic-bezier(.2,.7,.2,1);
+}
+
+.reveal.visible{
+  opacity:1;
+  transform:none;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media(max-width:1100px){
+
+  .main-nav{
+    gap:15px;
+  }
+
+  .machine-grid{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .library-grid{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .hero-grid{
+    grid-template-columns:1fr;
+  }
+
+  .hero-visual{
+    min-height:300px;
+    margin-top:-30px;
+  }
+
+  .hero-orbit{
+    width:330px;
+  }
+
+  .motion-grid{
+    grid-template-columns:1fr;
+  }
+
+  .motion-copy{
+    max-width:700px;
+  }
+
+  .news-grid{
+    grid-template-columns:1fr;
+  }
+}
+
+@media(max-width:800px){
+
+  :root{
+    --header:64px;
+  }
+
+  .container,
+  .header-inner,
+  .hero-grid{
+    width:min(100% - 28px,var(--max));
+  }
+
+  .section{
+    padding:75px 0;
+  }
+
+  .main-nav{
+    display:none;
+  }
+
+  .mobile-toggle{
+    display:grid;
+  }
+
+  .header-actions{
+    margin-left:auto;
+  }
+
+  .latest-grid{
+    grid-template-columns:1fr;
+  }
+
+  .latest-card{
+    min-height:390px;
+  }
+
+  .machine-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .library-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .stories-grid,
+  .archive-grid{
+    grid-template-columns:1fr;
+  }
+
+  .about-grid,
+  .contact-grid{
+    grid-template-columns:1fr;
+    gap:35px;
+  }
+
+  .machine-modal-grid{
+    grid-template-columns:1fr;
+  }
+
+  .modal-gallery,
+  .modal-gallery img{
+    min-height:300px;
+  }
+
+  .modal-content{
+    padding:28px 22px;
+  }
+
+  .story-modal-content{
+    padding:32px 22px;
+  }
+
+  .footer-inner{
+    flex-direction:column;
+    align-items:flex-start;
+  }
+}
+
+@media(max-width:520px){
+
+  .header-inner{
+    gap:8px;
+  }
+
+  .logo-sub{
+    display:none;
+  }
+
+  .icon-button{
+    width:36px;
+    height:36px;
+  }
+
+  .hero{
+    min-height:calc(100svh - 10px);
+  }
+
+  .hero-title{
+    font-size:clamp(55px,17vw,90px);
+  }
+
+  .hero-text{
+    font-size:13px;
+  }
+
+  .hero-visual{
+    min-height:190px;
+  }
+
+  .hero-orbit{
+    width:220px;
+  }
+
+  .hero-visual-text{
+    font-size:70px;
+  }
+
+  .section-head{
+    display:block;
+  }
+
+  .section-description{
+    margin-top:18px;
+  }
+
+  .machine-grid{
+    grid-template-columns:1fr;
+  }
+
+  .library-grid{
+    grid-template-columns:1fr 1fr;
+    gap:7px;
+  }
+
+  .machine-name{
+    font-size:20px;
+  }
+
+  .about-stats{
+    grid-template-columns:1fr;
+  }
+
+  .motion-stage,
+  model-viewer{
+    min-height:350px;
+    height:350px;
+  }
+
+  .modal{
+    padding:10px;
+  }
+
+  .modal-box{
+    max-height:94svh;
+  }
+
+  .modal-specs{
+    grid-template-columns:1fr;
+  }
+}
+
+/* =========================
+   REDUCED MOTION
+========================= */
+
+@media(prefers-reduced-motion:reduce){
+
+  html{
+    scroll-behavior:auto;
+  }
+
+  *,
+  *::before,
+  *::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+  }
+
+  .reveal{
+    opacity:1;
+    transform:none;
+  }
+}
+</style>
+
+<script type="module"
+src="https://unpkg.com/@google/model-viewer@4.0.0/dist/model-viewer.min.js">
+</script>
+</head>
+
+<body>
+
+<div id="scrollProgress"></div>
+
+<div id="loader">
+  <div class="loader-inner">
+    <div class="loader-brand">BGDN MOTION</div>
+    <div class="loader-line">
+      <span></span>
+    </div>
+  </div>
+</div>
+
+<header class="site-header">
+  <div class="header-inner">
+
+    <a href="#top" class="logo" aria-label="BGDN MOTION">
+      <span class="logo-mark"></span>
+      <span>
+        <span class="logo-text">BGDN</span>
+        <span class="logo-sub">MOTION / AUTOMOTIVE ARCHIVE</span>
+      </span>
+    </a>
+
+    <nav class="main-nav" aria-label="Основная навигация">
+      <a href="#latest">Latest</a>
+      <a href="#motion">Motion</a>
+      <a href="#machines">Machines</a>
+      <a href="#library">Library</a>
+      <a href="#stories">Stories</a>
+      <a href="#archive">Archive</a>
+      <a href="#about">About</a>
+    </nav>
+
+    <div class="header-actions">
+
+      <button
+        class="icon-button"
+        id="searchButton"
+        type="button"
+        aria-label="Поиск">
+
+        <svg viewBox="0 0 24 24">
+          <circle cx="10.8" cy="10.8" r="6.5"></circle>
+          <path d="M16 16l5 5"></path>
+        </svg>
+
+      </button>
+
+      <button
+        class="icon-button mobile-toggle"
+        id="mobileButton"
+        type="button"
+        aria-label="Меню"
+        aria-expanded="false">
+
+        <svg viewBox="0 0 24 24">
+          <path d="M4 7h16M4 12h16M4 17h16"></path>
+        </svg>
+
+      </button>
+
+    </div>
+
+  </div>
+</header>
+
+<div class="search-overlay" id="searchOverlay">
+
+  <div class="search-wrap">
+
+    <div class="search-top">
+      <div class="search-label">Search / BGDN MOTION</div>
+
+      <button
+        class="search-close"
+        id="searchClose"
+        type="button"
+        aria-label="Закрыть">
+        ×
+      </button>
+    </div>
+
+    <input
+      id="searchInput"
+      class="search-input"
+      type="search"
+      autocomplete="off"
+      placeholder="BMW M3, Supra, Niva...">
+
+    <div
+      id="searchResults"
+      class="search-results">
+    </div>
+
+  </div>
+
+</div>
+
+<div class="mobile-panel" id="mobilePanel">
+
+  <nav class="mobile-nav">
+
+    <a href="#latest">Latest</a>
+    <a href="#motion">Motion</a>
+    <a href="#machines">Machines</a>
+    <a href="#library">Library</a>
+    <a href="#stories">Stories</a>
+    <a href="#archive">Archive</a>
+    <a href="#news">News</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+
+  </nav>
+
+</div>
+
+<main id="top">
+
+  <!-- HERO -->
+
+  <section class="hero">
+
+    <div class="hero-grid">
+
+      <div class="hero-copy reveal">
+
+        <div class="hero-overline">
+          <span></span>
+          Automotive Visual Archive
+        </div>
+
+        <h1 class="hero-title">
+          CARS.<br>
+          <span>HISTORY.</span><br>
+          MOTION.
+        </h1>
+
+        <p class="hero-text">
+          BGDN MOTION — визуальный архив автомобильной культуры.
+          Редкие автомобили, история брендов, дизайн, технологии,
+          движение и машины, которые изменили своё время.
+        </p>
+
+        <div class="hero-actions">
+
+          <a
+            href="#machines"
+            class="btn btn-primary">
+            Explore machines
+          </a>
+
+          <a
+            href="#stories"
+            class="btn btn-secondary">
+            Read stories
+          </a>
+
+        </div>
+
+      </div>
+
+      <div class="hero-visual reveal">
+
+        <div class="hero-orbit"></div>
+
+        <div class="hero-visual-text">
+          01
+        </div>
+
+        <div
+          class="hero-red-dot"
+          style="top:28%;right:22%;">
+        </div>
+
+        <div
+          class="hero-red-dot"
+          style="bottom:22%;left:20%;">
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- TICKER -->
+
+  <div class="ticker">
+
+    <div class="ticker-track">
+
+      <div class="ticker-item">
+        BGDN MOTION <b>●</b>
+        AUTOMOTIVE CULTURE <b>●</b>
+        RARE CARS <b>●</b>
+        DESIGN <b>●</b>
+        HISTORY <b>●</b>
+      </div>
+
+      <div class="ticker-item" aria-hidden="true">
+        BGDN MOTION <b>●</b>
+        AUTOMOTIVE CULTURE <b>●</b>
+        RARE CARS <b>●</b>
+        DESIGN <b>●</b>
+        HISTORY <b>●</b>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- LATEST -->
+
+  <section class="section" id="latest">
+
+    <div class="container">
+
+      <div class="section-head reveal">
+
+        <div>
+          <div class="section-kicker">01 / Latest</div>
+          <h2 class="section-title">
+            Latest machines
+          </h2>
+        </div>
+
+        <p class="section-description">
+          Автомобили, которые стали частью истории —
+          от японской классики до советской инженерии.
+        </p>
+
+      </div>
+
+      <div
+        class="latest-grid"
+        id="latestGrid">
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- MOTION -->
+
+  <section class="section motion-section" id="motion">
+
+    <div class="container">
+
+      <div class="motion-grid">
+
+        <div class="motion-copy reveal">
+
+          <div class="section-kicker">
+            02 / Motion
+          </div>
+
+          <h2 class="section-title">
+            MACHINE<br>
+            IN MOTION
+          </h2>
+
+          <p>
+            Интерактивная 3D-зона BGDN MOTION.
+            Загрузи файл <strong>car.glb</strong> рядом
+            с index.html, чтобы использовать собственную
+            3D-модель автомобиля.
+          </p>
+
+          <div class="motion-controls">
+
+            <button
+              class="paint-button active"
+              type="button"
+              data-color="#d9d9d9"
+              style="background:#d9d9d9"
+              aria-label="Серебристый">
+            </button>
+
+            <button
+              class="paint-button"
+              type="button"
+              data-color="#111111"
+              style="background:#111111"
+              aria-label="Чёрный">
+            </button>
+
+            <button
+              class="paint-button"
+              type="button"
+              data-color="#e10600"
+              style="background:#e10600"
+              aria-label="Красный">
+            </button>
+
+            <button
+              class="paint-button"
+              type="button"
+              data-color="#1c385e"
+              style="background:#1c385e"
+              aria-label="Синий">
+            </button>
+
+          </div>
+
+        </div>
+
+        <div class="motion-stage reveal">
+
+          <div class="model-fallback">
+            BGDN
+          </div>
+
+          <model-viewer
+            id="carModel"
+            src="car.glb"
+            alt="3D автомобиль BGDN MOTION"
+            camera-controls
+            auto-rotate
+            auto-rotate-delay="0"
+            rotation-per-second="18deg"
+            shadow-intensity="1"
+            exposure="1"
+            environment-image="neutral"
+            camera-orbit="45deg 72deg auto"
+            field-of-view="35deg">
+          </model-viewer>
+
+          <div
+            class="model-status"
+            id="modelStatus">
+            MODEL / LOADING
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- MACHINES -->
+
+  <section class="section" id="machines">
+
+    <div class="container">
+
+      <div class="section-head reveal">
+
+        <div>
+          <div class="section-kicker">03 / Machines</div>
+
+          <h2 class="section-title">
+            The machines
+          </h2>
+        </div>
+
+        <p class="section-description">
+          Каталог автомобилей разных эпох,
+          стран и автомобильных школ.
+        </p>
+
+      </div>
+
+      <div
+        class="filters reveal"
+        id="machineFilters">
+      </div>
+
+      <div
+        class="machine-grid"
+        id="machineGrid">
+      </div>
+
+      <div class="center-action">
+
+        <button
+          class="btn btn-secondary"
+          id="loadMachines"
+          type="button">
+          Load more
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- LIBRARY -->
+
+  <section class="section" id="library">
+
+    <div class="container">
+
+      <div class="section-head reveal">
+
+        <div>
+          <div class="section-kicker">04 / Library</div>
+
+          <h2 class="section-title">
+            Visual library
+          </h2>
+        </div>
+
+        <p class="section-description">
+          Визуальная подборка автомобилей,
+          которые сформировали автомобильную культуру.
+        </p>
+
+      </div>
+
+      <div
+        class="library-grid"
+        id="libraryGrid">
+      </div>
+
+      <div class="center-action">
+
+        <button
+          class="btn btn-secondary"
+          id="loadLibrary"
+          type="button">
+          Load more
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- STORIES -->
+
+  <section class="section" id="stories">
+
+    <div class="container">
+
+      <div class="section-head reveal">
+
+        <div>
+          <div class="section-kicker">05 / Stories</div>
+
+          <h2 class="section-title">
+            Stories
+          </h2>
+        </div>
+
+        <p class="section-description">
+          Истории автомобилей, технологий,
+          дизайнеров и целых автомобильных эпох.
+        </p>
+
+      </div>
+
+      <div
+        class="stories-grid"
+        id="storiesGrid">
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ARCHIVE -->
+
+  <section class="section" id="archive">
+
+    <div class="container">
+
+      <div class="section-head reveal">
+
+        <div>
+          <div class="section-kicker">06 / Archive</div>
+
+          <h2 class="section-title">
+            Archive
+          </h2>
+        </div>
+
+        <p class="section-description">
+          Тематические направления автомобильной истории.
+        </p>
+
+      </div>
+
+      <div
+        class="archive-grid"
+        id="archiveGrid">
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- NEWS -->
+
+  <section class="section" id="news">
+
+    <div class="container">
+
+      <div class="section-head reveal">
+
+        <div>
+          <div class="section-kicker">07 / News</div>
+
+          <h2 class="section-title">
+            Automotive news
+          </h2>
+        </div>
+
+        <p class="section-description">
+          Последние автомобильные темы и события.
+        </p>
+
+      </div>
+
+      <div class="news-grid">
+
+        <article class="news-feature reveal">
+
+          <div class="section-kicker">
+            BGDN MOTION / ARCHIVE
+          </div>
+
+          <h3 id="newsFeatureTitle">
+            Автомобиль продолжает меняться
+          </h3>
+
+        </article>
+
+        <div
+          class="news-list"
+          id="newsList">
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- ABOUT -->
+
+  <section class="section" id="about">
+
+    <div class="container">
+
+      <div class="about-grid">
+
+        <div class="reveal">
+
+          <div class="section-kicker">
+            08 / About
+          </div>
+
+          <div class="about-large">
+            НЕ ПРОСТО<br>
+            <span>МАШИНЫ.</span><br>
+            КОНТЕКСТ.
+          </div>
+
+        </div>
+
+        <div class="about-copy reveal">
+
+          <p>
+            BGDN MOTION — независимый визуальный архив
+            автомобильной культуры.
+          </p>
+
+          <p>
+            Здесь встречаются редкие автомобили,
+            история мировых брендов, российская
+            автомобильная культура, дизайн, технологии
+            и истории людей, стоящих за машинами.
+          </p>
+
+          <div class="about-stats">
+
+            <div class="stat">
+              <strong id="statMachines">0</strong>
+              <span>Machines</span>
+            </div>
+
+            <div class="stat">
+              <strong id="statStories">0</strong>
+              <span>Stories</span>
+            </div>
+
+            <div class="stat">
+              <strong id="statYears">100+</strong>
+              <span>Years of history</span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- CONTACT -->
+
+  <section class="section" id="contact">
+
+    <div class="container">
+
+      <div class="contact-grid">
+
+        <div class="reveal">
+
+          <div class="section-kicker">
+            09 / Contact
+          </div>
+
+          <h2 class="contact-title">
+            HAVE A<br>
+            <span>CAR?</span>
+          </h2>
+
+          <p class="section-description" style="margin-top:25px">
+            Предложить автомобиль для съёмки,
+            историю или сотрудничество.
+          </p>
+
+        </div>
+
+        <form
+          class="contact-form reveal"
+          id="contactForm">
+
+          <input
+            class="form-field"
+            id="contactName"
+            type="text"
+            placeholder="Имя"
+            required>
+
+          <input
+            class="form-field"
+            id="contactEmail"
+            type="email"
+            placeholder="Email"
+            required>
+
+          <textarea
+            class="form-field"
+            id="contactMessage"
+            placeholder="Сообщение"
+            required></textarea>
+
+          <button
+            class="btn btn-primary"
+            type="submit">
+            Send message
+          </button>
+
+        </form>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</main>
+
+<footer class="site-footer">
+
+  <div class="container">
+
+    <div class="footer-inner">
+
+      <div class="footer-copy">
+        © <span id="footerYear"></span> BGDN MOTION
+      </div>
+
+      <div class="footer-links">
+        <a href="#top">Top</a>
+        <a href="#machines">Machines</a>
+        <a href="#stories">Stories</a>
+        <a href="#contact">Contact</a>
+      </div>
+
+    </div>
+
+  </div>
+
+</footer>
+
+<!-- MACHINE MODAL -->
+
+<div
+  class="modal"
+  id="machineModal"
+  role="dialog"
+  aria-modal="true"
+  aria-label="Информация об автомобиле">
+
+  <div class="modal-box">
+
+    <button
+      class="modal-close"
+      id="machineModalClose"
+      type="button"
+      aria-label="Закрыть">
+      ×
+    </button>
+
+    <div class="machine-modal-grid">
+
+      <div
+        class="modal-gallery"
+        id="machineModalGallery">
+      </div>
+
+      <div class="modal-content">
+
+        <div
+          class="modal-kicker"
+          id="modalMachineBrand">
+        </div>
+
+        <h2
+          class="modal-title"
+          id="modalMachineTitle">
+        </h2>
+
+        <div
+          class="modal-text"
+          id="modalMachineStory">
+        </div>
+
+        <div
+          class="modal-specs"
+          id="modalMachineSpecs">
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<!-- STORY MODAL -->
+
+<div
+  class="modal"
+  id="storyModal"
+  role="dialog"
+  aria-modal="true"
+  aria-label="История">
+
+  <div class="modal-box">
+
+    <button
+      class="modal-close"
+      id="storyModalClose"
+      type="button"
+      aria-label="Закрыть">
+      ×
+    </button>
+
+    <div class="story-modal-content">
+
+      <div
+        class="modal-kicker"
+        id="storyModalCategory">
+      </div>
+
+      <h2
+        id="storyModalTitle">
+      </h2>
+
+      <div
+        class="story-modal-text"
+        id="storyModalText">
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+<div id="toast"></div>
+
+<script>
+/* JavaScript продолжение — ЧАСТЬ 3/4 */
+</script>
+
+</body>
+</html>
+<script>
+/* =========================================================
+   BGDN MOTION
+   DATA
+========================================================= */
+
+const MACHINES = [
+
+  {
+    brand:"BMW",
+    name:"BMW M3 E30",
+    year:"1986–1991",
+    type:"Sport / Touring",
+    country:"Germany",
+    engine:"2.3L I4",
+    power:"195–238 hp",
+    drive:"RWD",
+    story:"BMW M3 E30 появился как омологационная модель для участия BMW в кузовных гонках. Компактный кузов, атмосферный четырёхцилиндровый мотор и задний привод сделали E30 M3 одной из самых узнаваемых спортивных машин своей эпохи.",
+    imageQuery:"BMW M3 E30"
+  },
+
+  {
+    brand:"BMW",
+    name:"BMW M5 E39",
+    year:"1998–2003",
+    type:"Sport Sedan",
+    country:"Germany",
+    engine:"4.9L V8",
+    power:"400 hp",
+    drive:"RWD",
+    story:"M5 E39 объединил практичность большого седана с атмосферным V8. Модель стала одним из символов эпохи, когда высокопроизводительные седаны сохраняли относительно простой механический характер.",
+    imageQuery:"BMW M5 E39"
+  },
+
+  {
+    brand:"Mercedes-Benz",
+    name:"190E Evolution II",
+    year:"1990",
+    type:"Sport Sedan",
+    country:"Germany",
+    engine:"2.5L I4",
+    power:"235 hp",
+    drive:"RWD",
+    story:"190E Evolution II создавался для омологации гоночной программы Mercedes-Benz. Агрессивный аэродинамический обвес, увеличенные колёса и доработанная подвеска сделали его одной из самых узнаваемых версий W201.",
+    imageQuery:"Mercedes 190E Evolution II"
+  },
+
+  {
+    brand:"Porsche",
+    name:"911 Carrera RS 2.7",
+    year:"1972–1973",
+    type:"Sports Car",
+    country:"Germany",
+    engine:"2.7L Flat-6",
+    power:"210 hp",
+    drive:"RWD",
+    story:"Carrera RS 2.7 стала одной из самых известных дорожных версий Porsche 911. Автомобиль получил облегчённый кузов, расширенные крылья и знаменитый задний ducktail.",
+    imageQuery:"Porsche 911 Carrera RS 2.7"
+  },
+
+  {
+    brand:"Audi",
+    name:"Audi Quattro",
+    year:"1980–1991",
+    type:"Rally / Coupe",
+    country:"Germany",
+    engine:"2.1L Turbo I5",
+    power:"200+ hp",
+    drive:"AWD",
+    story:"Audi Quattro изменил представление о полном приводе в ралли. Технология quattro стала важной частью истории Audi и впоследствии распространилась на дорожные автомобили.",
+    imageQuery:"Audi Quattro"
+  },
+
+  {
+    brand:"Volkswagen",
+    name:"Golf GTI Mk1",
+    year:"1976–1983",
+    type:"Hot Hatch",
+    country:"Germany",
+    engine:"1.6L I4",
+    power:"110 hp",
+    drive:"FWD",
+    story:"Golf GTI первого поколения стал одним из основателей современного класса горячих хэтчбеков. Небольшая масса и достаточно мощный двигатель позволяли получать спортивные ощущения без огромного бюджета.",
+    imageQuery:"Volkswagen Golf GTI Mk1"
+  },
+
+  {
+    brand:"Toyota",
+    name:"Supra A80",
+    year:"1993–2002",
+    type:"Sports Car",
+    country:"Japan",
+    engine:"3.0L Twin Turbo I6",
+    power:"280–330 hp",
+    drive:"RWD",
+    story:"Supra A80 получила рядную шестёрку 2JZ-GTE с двумя турбокомпрессорами и стала культовым автомобилем японской автомобильной культуры. Возможности двигателя для тюнинга сделали модель особенно известной.",
+    imageQuery:"Toyota Supra A80"
+  },
+
+  {
+    brand:"Nissan",
+    name:"Skyline GT-R R34",
+    year:"1999–2002",
+    type:"Performance Coupe",
+    country:"Japan",
+    engine:"2.6L Twin Turbo I6",
+    power:"280 hp",
+    drive:"AWD",
+    story:"R34 GT-R стал последним поколением классической линии Skyline GT-R. Система полного привода ATTESA и двигатель RB26DETT сделали его важной частью японской спортивной автомобильной истории.",
+    imageQuery:"Nissan Skyline GT-R R34"
+  },
+
+  {
+    brand:"Mazda",
+    name:"RX-7 FD",
+    year:"1992–2002",
+    type:"Sports Car",
+    country:"Japan",
+    engine:"1.3L Twin Turbo Rotary",
+    power:"255–280 hp",
+    drive:"RWD",
+    story:"RX-7 третьего поколения использовала компактный роторный двигатель Wankel с двойным турбонаддувом. Низкая масса и сбалансированное шасси сделали FD одной из самых характерных японских машин 1990-х.",
+    imageQuery:"Mazda RX-7 FD"
+  },
+
+  {
+    brand:"Honda",
+    name:"NSX",
+    year:"1990–2005",
+    type:"Supercar",
+    country:"Japan",
+    engine:"3.0L V6",
+    power:"270 hp",
+    drive:"RWD",
+    story:"Honda NSX показала, что суперкар может сочетать высокие характеристики с удобством обычного автомобиля. При разработке использовались алюминиевый кузов и технологии, пришедшие из автоспорта.",
+    imageQuery:"Honda NSX 1990"
+  },
+
+  {
+    brand:"Mitsubishi",
+    name:"Lancer Evolution VI",
+    year:"1999–2001",
+    type:"Rally Sedan",
+    country:"Japan",
+    engine:"2.0L Turbo I4",
+    power:"280 hp",
+    drive:"AWD",
+    story:"Lancer Evolution VI появился в период расцвета японского раллийного направления. Полный привод, турбированный двигатель и активная работа с аэродинамикой сделали Evolution частью легенды WRC.",
+    imageQuery:"Mitsubishi Lancer Evolution VI"
+  },
+
+  {
+    brand:"Subaru",
+    name:"Impreza WRX STI",
+    year:"1990s–2000s",
+    type:"Rally Sedan",
+    country:"Japan",
+    engine:"2.0L Turbo Boxer",
+    power:"250–280+ hp",
+    drive:"AWD",
+    story:"Subaru Impreza WRX STI стала одним из главных символов раллийной эпохи 1990-х и 2000-х. Оппозитный двигатель, полный привод и характерный звук сделали автомобиль узнаваемым во всём мире.",
+    imageQuery:"Subaru Impreza WRX STI"
+  },
+
+  {
+    brand:"Ford",
+    name:"Mustang GT",
+    year:"1964–present",
+    type:"Muscle / Pony Car",
+    country:"USA",
+    engine:"V8",
+    power:"Varies",
+    drive:"RWD",
+    story:"Ford Mustang представили в 1964 году. Модель сформировала новый сегмент доступных спортивных автомобилей и стала одним из наиболее узнаваемых американских автомобильных имён.",
+    imageQuery:"Ford Mustang GT classic"
+  },
+
+  {
+    brand:"Chevrolet",
+    name:"Corvette C3",
+    year:"1968–1982",
+    type:"Sports Car",
+    country:"USA",
+    engine:"V8",
+    power:"Varies",
+    drive:"RWD",
+    story:"Третье поколение Corvette получило выразительный кузов с длинным капотом и характерной линией боковин. C3 стала одной из наиболее узнаваемых Corvette в истории марки.",
+    imageQuery:"Chevrolet Corvette C3"
+  },
+
+  {
+    brand:"Dodge",
+    name:"Challenger R/T",
+    year:"1970–1974",
+    type:"Muscle Car",
+    country:"USA",
+    engine:"V8",
+    power:"Varies",
+    drive:"RWD",
+    story:"Dodge Challenger первого поколения стал одним из ярких представителей американской muscle-car эпохи. Версии R/T предлагали крупные V8 и ориентированный на производительность характер.",
+    imageQuery:"Dodge Challenger R/T 1970"
+  },
+
+  {
+    brand:"Ferrari",
+    name:"F40",
+    year:"1987–1992",
+    type:"Supercar",
+    country:"Italy",
+    engine:"2.9L Twin Turbo V8",
+    power:"478 hp",
+    drive:"RWD",
+    story:"Ferrari F40 была создана как экстремальный дорожный автомобиль и стала последней серийной Ferrari, разработанной при жизни Энцо Феррари. Минимум комфорта, малая масса и мощный V8 определили её характер.",
+    imageQuery:"Ferrari F40"
+  },
+
+  {
+    brand:"Ferrari",
+    name:"250 GTO",
+    year:"1962–1964",
+    type:"Racing / GT",
+    country:"Italy",
+    engine:"3.0L V12",
+    power:"300 hp",
+    drive:"RWD",
+    story:"Ferrari 250 GTO создавалась для GT-соревнований и стала одним из самых известных автомобилей Ferrari. Сочетание гоночной техники и элегантного дизайна сформировало её уникальное место в истории.",
+    imageQuery:"Ferrari 250 GTO"
+  },
+
+  {
+    brand:"Lamborghini",
+    name:"Countach",
+    year:"1974–1990",
+    type:"Supercar",
+    country:"Italy",
+    engine:"V12",
+    power:"Varies",
+    drive:"RWD",
+    story:"Countach стал визуальным символом Lamborghini 1970-х и 1980-х. Клиновидный кузов, двери типа scissor и центрально расположенный V12 определили новый язык дизайна суперкаров.",
+    imageQuery:"Lamborghini Countach"
+  },
+
+  {
+    brand:"Lamborghini",
+    name:"Miura",
+    year:"1966–1973",
+    type:"Supercar",
+    country:"Italy",
+    engine:"3.9L V12",
+    power:"350 hp",
+    drive:"RWD",
+    story:"Lamborghini Miura стала одной из первых серийных моделей с центрально расположенным поперечным V12. Её появление оказало огромное влияние на дальнейшее развитие среднемоторных суперкаров.",
+    imageQuery:"Lamborghini Miura"
+  },
+
+  {
+    brand:"Lancia",
+    name:"Delta Integrale",
+    year:"1987–1994",
+    type:"Rally Hatch",
+    country:"Italy",
+    engine:"2.0L Turbo I4",
+    power:"185–210+ hp",
+    drive:"AWD",
+    story:"Lancia Delta Integrale стала одним из наиболее успешных раллийных автомобилей своего времени. Дорожные версии были тесно связаны с гоночной программой Lancia.",
+    imageQuery:"Lancia Delta Integrale"
+  },
+
+  {
+    brand:"Renault",
+    name:"5 Turbo",
+    year:"1980–1985",
+    type:"Rally / Hot Hatch",
+    country:"France",
+    engine:"1.4L Turbo I4",
+    power:"160 hp",
+    drive:"RWD",
+    story:"Renault 5 Turbo получила среднемоторную компоновку и задний привод, превратив небольшой городской автомобиль в необычную спортивную машину. Модель создавалась с учётом раллийной омологации.",
+    imageQuery:"Renault 5 Turbo"
+  },
+
+  {
+    brand:"Peugeot",
+    name:"205 GTI",
+    year:"1984–1994",
+    type:"Hot Hatch",
+    country:"France",
+    engine:"1.6–1.9L I4",
+    power:"105–130 hp",
+    drive:"FWD",
+    story:"Peugeot 205 GTI стала одной из наиболее известных французских горячих моделей. Небольшая масса, отзывчивое шасси и компактные размеры сделали автомобиль популярным среди энтузиастов.",
+    imageQuery:"Peugeot 205 GTI"
+  },
+
+  {
+    brand:"Citroën",
+    name:"DS",
+    year:"1955–1975",
+    type:"Luxury / Innovation",
+    country:"France",
+    engine:"I4",
+    power:"Varies",
+    drive:"FWD",
+    story:"Citroën DS стала технологическим экспериментом своего времени. Гидропневматическая подвеска, необычный дизайн и инновационная конструкция сделали DS одним из самых значимых французских автомобилей XX века.",
+    imageQuery:"Citroen DS 1955"
+  },
+
+  {
+    brand:"Alpine",
+    name:"A110",
+    year:"1962–1977",
+    type:"Sports / Rally",
+    country:"France",
+    engine:"I4",
+    power:"Varies",
+    drive:"RWD",
+    story:"Alpine A110 получила лёгкий кузов и заднемоторную компоновку. Благодаря малой массе модель стала успешной в ралли и приобрела культовый статус.",
+    imageQuery:"Alpine A110 classic"
+  },
+
+  {
+    brand:"Jaguar",
+    name:"E-Type",
+    year:"1961–1975",
+    type:"Sports Car",
+    country:"UK",
+    engine:"I6 / V12",
+    power:"Varies",
+    drive:"RWD",
+    story:"Jaguar E-Type стала одной из самых узнаваемых спортивных машин 1960-х. Длинный капот, независимая подвеска и высокие для своего времени характеристики сделали автомобиль международным символом британского дизайна.",
+    imageQuery:"Jaguar E-Type"
+  },
+
+  {
+    brand:"Lotus",
+    name:"Elise",
+    year:"1996–2021",
+    type:"Lightweight Sports",
+    country:"UK",
+    engine:"I4",
+    power:"Varies",
+    drive:"RWD",
+    story:"Lotus Elise развивала философию максимального снижения массы. Небольшой вес и простая конструкция позволили добиться высокой управляемости без необходимости устанавливать огромный двигатель.",
+    imageQuery:"Lotus Elise"
+  },
+
+  {
+    brand:"McLaren",
+    name:"F1",
+    year:"1992–1998",
+    type:"Supercar",
+    country:"UK",
+    engine:"6.1L V12",
+    power:"627 hp",
+    drive:"RWD",
+    story:"McLaren F1 использовала центральное водительское место, углепластиковый монокок и атмосферный V12 BMW. На протяжении многих лет модель считалась одним из самых быстрых дорожных автомобилей в мире.",
+    imageQuery:"McLaren F1"
+  },
+
+  {
+    brand:"Aston Martin",
+    name:"DB5",
+    year:"1963–1965",
+    type:"Grand Tourer",
+    country:"UK",
+    engine:"4.0L I6",
+    power:"282 hp",
+    drive:"RWD",
+    story:"Aston Martin DB5 стала международно известной благодаря своему появлению в фильмах о Джеймсе Бонде. Помимо кинематографического образа, DB5 является важной частью истории британских GT.",
+    imageQuery:"Aston Martin DB5"
+  },
+
+  {
+    brand:"Jaguar",
+    name:"XJ220",
+    year:"1992–1994",
+    type:"Supercar",
+    country:"UK",
+    engine:"3.5L Twin Turbo V6",
+    power:"542 hp",
+    drive:"AWD",
+    story:"Jaguar XJ220 появилась как экстремальный проект Jaguar. Серийная версия получила турбированный V6 и отличалась длинным низким кузовом.",
+    imageQuery:"Jaguar XJ220"
+  },
+
+  {
+    brand:"Ford",
+    name:"Focus RS Mk2",
+    year:"2009–2010",
+    type:"Hot Hatch",
+    country:"UK",
+    engine:"2.5L Turbo I5",
+    power:"305 hp",
+    drive:"FWD",
+    story:"Focus RS второго поколения использовал пятицилиндровый турбированный двигатель и передний привод. Специальная передняя подвеска позволила эффективно реализовать большую мощность.",
+    imageQuery:"Ford Focus RS Mk2"
+  },
+
+  {
+    brand:"Volvo",
+    name:"850 R",
+    year:"1996–1997",
+    type:"Performance Wagon",
+    country:"Sweden",
+    engine:"2.3L Turbo I5",
+    power:"250 hp",
+    drive:"FWD",
+    story:"Volvo 850 R стала спортивной интерпретацией практичного семейства 850. Особенно известной стала универсальная версия, которая показала, что быстрый автомобиль может оставаться полноценным семейным транспортом.",
+    imageQuery:"Volvo 850 R"
+  },
+
+  /* =========================
+     RUSSIA
+  ========================= */
+
+  {
+    brand:"Lada",
+    name:"Niva Legend",
+    year:"1977–present",
+    type:"Off-road",
+    country:"Russia / USSR",
+    engine:"1.7L I4",
+    power:"83 hp",
+    drive:"4WD",
+    story:"Lada Niva была представлена в 1977 году и стала одной из самых известных советских разработок. Постоянный полный привод и несущий кузов позволили создать необычное сочетание внедорожных возможностей и относительно компактных размеров.",
+    imageQuery:"Lada Niva Legend"
+  },
+
+  {
+    brand:"Lada",
+    name:"Vesta",
+    year:"2015–present",
+    type:"Sedan",
+    country:"Russia",
+    engine:"I4",
+    power:"Varies",
+    drive:"FWD",
+    story:"Lada Vesta стала одной из ключевых современных моделей АвтоВАЗа. Автомобиль создавался как более современная платформа марки с новым дизайном и расширенным набором оборудования.",
+    imageQuery:"Lada Vesta"
+  },
+
+  {
+    brand:"Lada",
+    name:"2107",
+    year:"1982–2012",
+    type:"Sedan",
+    country:"Russia / USSR",
+    engine:"I4",
+    power:"Varies",
+    drive:"RWD",
+    story:"ВАЗ-2107 стал одной из наиболее узнаваемых моделей классического семейства Lada. Конструкция сохраняла задний привод и простую механическую архитектуру.",
+    imageQuery:"Lada 2107"
+  },
+
+  {
+    brand:"Lada",
+    name:"Granta",
+    year:"2011–present",
+    type:"Compact Sedan",
+    country:"Russia",
+    engine:"I4",
+    power:"Varies",
+    drive:"FWD",
+    story:"Lada Granta стала массовой моделью российского рынка и одной из наиболее доступных современных машин АвтоВАЗа.",
+    imageQuery:"Lada Granta"
+  },
+
+  {
+    brand:"GAZ",
+    name:"GAZ-21 Volga",
+    year:"1956–1970",
+    type:"Executive Sedan",
+    country:"Russia / USSR",
+    engine:"I4",
+    power:"Varies",
+    drive:"RWD",
+    story:"ГАЗ-21 Волга стала одним из символов советского автомобильного дизайна. Большой кузов, характерная решётка радиатора и высокий дорожный просвет сделали её узнаваемой машиной своего времени.",
+    imageQuery:"GAZ-21 Volga"
+  },
+
+  {
+    brand:"GAZ",
+    name:"GAZ-24 Volga",
+    year:"1968–1985",
+    type:"Executive Sedan",
+    country:"Russia / USSR",
+    engine:"2.4L I4",
+    power:"95 hp",
+    drive:"RWD",
+    story:"ГАЗ-24 Волга стала массовым представительским автомобилем СССР. Её конструкция использовалась в течение многих лет и стала частью повседневной автомобильной культуры страны.",
+    imageQuery:"GAZ-24 Volga"
+  },
+
+  {
+    brand:"UAZ",
+    name:"UAZ-469",
+    year:"1971–2003",
+    type:"Off-road",
+    country:"Russia / USSR",
+    engine:"2.4L I4",
+    power:"75 hp",
+    drive:"4WD",
+    story:"УАЗ-469 создавался как универсальный армейский и гражданский внедорожник. Простая конструкция и высокая проходимость обеспечили ему долгую эксплуатацию.",
+    imageQuery:"UAZ 469"
+  },
+
+  {
+    brand:"Moskvich",
+    name:"Moskvich-2141",
+    year:"1986–2001",
+    type:"Hatchback",
+    country:"Russia / USSR",
+    engine:"I4",
+    power:"Varies",
+    drive:"FWD",
+    story:"Москвич-2141 стал важным переходом АЗЛК к переднеприводной архитектуре. Пятидверный кузов заметно отличался от классических заднеприводных моделей советского периода.",
+    imageQuery:"Moskvich 2141"
+  },
+
+  {
+    brand:"Aurus",
+    name:"Senat",
+    year:"2018–present",
+    type:"Luxury Sedan",
+    country:"Russia",
+    engine:"4.4L V8 Hybrid",
+    power:"Varies",
+    drive:"AWD",
+    story:"Aurus Senat относится к современному российскому представительскому сегменту. Проект использует сложную силовую установку и полный привод.",
+    imageQuery:"Aurus Senat"
+  },
+
+  {
+    brand:"ZIL",
+    name:"ZIL-111",
+    year:"1958–1967",
+    type:"Executive Limousine",
+    country:"Russia / USSR",
+    engine:"6.0L V8",
+    power:"200 hp",
+    drive:"RWD",
+    story:"ЗИЛ-111 был одним из главных представительских автомобилей Советского Союза. Большой кузов, V8 и высокий уровень оснащения отражали технологические и дизайнерские представления своего времени.",
+    imageQuery:"ZIL 111"
+  },
+
+  /* =========================
+     MORE CLASSICS
+  ========================= */
+
+  {
+    brand:"Tesla",
+    name:"Model S",
+    year:"2012–present",
+    type:"Electric Sedan",
+    country:"USA",
+    engine:"Electric",
+    power:"Varies",
+    drive:"AWD / RWD",
+    story:"Tesla Model S стала одной из моделей, изменивших восприятие электромобиля как автомобиля, способного конкурировать с мощными бензиновыми седанами.",
+    imageQuery:"Tesla Model S"
+  },
+
+  {
+    brand:"Toyota",
+    name:"AE86",
+    year:"1983–1987",
+    type:"Sports Coupe",
+    country:"Japan",
+    engine:"1.6L I4",
+    power:"124 hp",
+    drive:"RWD",
+    story:"Toyota AE86 стала культовой благодаря заднему приводу, небольшой массе и простоте конструкции. Автомобиль получил новую популярность благодаря дрифту и японской автомобильной культуре.",
+    imageQuery:"Toyota AE86"
+  },
+
+  {
+    brand:"Honda",
+    name:"Civic Type R EK9",
+    year:"1997–2000",
+    type:"Hot Hatch",
+    country:"Japan",
+    engine:"1.6L VTEC I4",
+    power:"185 hp",
+    drive:"FWD",
+    story:"Civic Type R EK9 стала одной из самых известных высокооборотных переднеприводных Honda. Атмосферный B16B VTEC и малая масса сформировали характер автомобиля.",
+    imageQuery:"Honda Civic Type R EK9"
+  },
+
+  {
+    brand:"Nissan",
+    name:"300ZX Z32",
+    year:"1989–2000",
+    type:"Sports Car",
+    country:"Japan",
+    engine:"3.0L Twin Turbo V6",
+    power:"300 hp",
+    drive:"RWD / AWD",
+    story:"Nissan 300ZX Z32 стала технологически насыщенной японской спортивной машиной конца 1980-х. Версия Twin Turbo предлагала высокую производительность и сложное шасси.",
+    imageQuery:"Nissan 300ZX Z32"
+  },
+
+  {
+    brand:"Porsche",
+    name:"959",
+    year:"1986–1988",
+    type:"Supercar / Rally",
+    country:"Germany",
+    engine:"2.8L Twin Turbo Flat-6",
+    power:"444 hp",
+    drive:"AWD",
+    story:"Porsche 959 создавалась с использованием технологий, связанных с ралли. Полный привод и сложная электроника сделали её одним из наиболее технологичных суперкаров своего времени.",
+    imageQuery:"Porsche 959"
+  },
+
+  {
+    brand:"Mercedes-Benz",
+    name:"300 SL Gullwing",
+    year:"1954–1957",
+    type:"Sports Car",
+    country:"Germany",
+    engine:"3.0L I6",
+    power:"215 hp",
+    drive:"RWD",
+    story:"Mercedes-Benz 300 SL известен дверями типа gullwing и трубчатой пространственной рамой. Модель стала одним из символов спортивных автомобилей 1950-х.",
+    imageQuery:"Mercedes Benz 300 SL Gullwing"
+  },
+
+  {
+    brand:"Chevrolet",
+    name:"Camaro Z/28",
+    year:"1967–1969",
+    type:"Muscle Car",
+    country:"USA",
+    engine:"5.0L V8",
+    power:"290 hp",
+    drive:"RWD",
+    story:"Camaro Z/28 создавался с учётом участия в гоночных соревнованиях Trans-Am. Версия сочетала сравнительно компактный кузов с высокооборотным V8.",
+    imageQuery:"Chevrolet Camaro Z28 1969"
+  },
+
+  {
+    brand:"Renault",
+    name:"Clio V6",
+    year:"2001–2005",
+    type:"Hot Hatch",
+    country:"France",
+    engine:"3.0L V6",
+    power:"230–255 hp",
+    drive:"RWD",
+    story:"Clio V6 стала одной из самых необычных серийных моделей Renault. Вместо заднего ряда сидений появился V6, а привод был перенесён на задние колёса.",
+    imageQuery:"Renault Clio V6"
+  }
+
+];
+
+
+/* =========================================================
+   STORIES
+========================================================= */
+
+const STORIES = [
+
+  {
+    category:"RUSSIA",
+    title:"Нива: маленький автомобиль для большой страны",
+    text:"История Lada Niva начинается в СССР в 1970-х. Перед разработчиками стояла задача создать компактный автомобиль, способный передвигаться там, где обычный легковой транспорт уже не справлялся. Конструкция с постоянным полным приводом и несущим кузовом стала необычным решением для своего времени.",
+    query:"Lada Niva history"
+  },
+
+  {
+    category:"JDM",
+    title:"2JZ и эпоха японского тюнинга",
+    text:"Toyota 2JZ-GTE стал одним из самых известных японских турбированных двигателей. Его конструктивный запас прочности и широкие возможности настройки сделали двигатель важной частью культуры тюнинга 1990-х и 2000-х.",
+    query:"Toyota 2JZ engine"
+  },
+
+  {
+    category:"MOTORSPORT",
+    title:"Когда ралли меняло дорожные машины",
+    text:"Ралли стало испытательным полигоном для технологий, которые позже появлялись на дорожных автомобилях. Полный привод, турбонаддув, сложные системы управления и облегчённые конструкции получили развитие благодаря соревнованиям.",
+    query:"Group B rally cars"
+  },
+
+  {
+    category:"GERMANY",
+    title:"Рождение BMW M3",
+    text:"BMW M3 создавалась как омологационная модель для гоночной программы. Первое поколение E30 получило специальный кузов, высокооборотный четырёхцилиндровый двигатель и спортивное шасси.",
+    query:"BMW E30 M3 history"
+  },
+
+  {
+    category:"ITALY",
+    title:"Ferrari F40: предел эпохи",
+    text:"Ferrari F40 появилась в конце 1980-х и стала концентрированным выражением философии спортивного автомобиля того времени. Турбированный V8, малая масса и минимум лишнего оборудования определили её характер.",
+    query:"Ferrari F40 history"
+  },
+
+  {
+    category:"FRANCE",
+    title:"Авангард Citroën DS",
+    text:"Citroën DS продемонстрировала, насколько далеко автомобильная промышленность может отойти от привычных технических решений. Гидропневматическая подвеска, необычный кузов и футуристичный интерьер сделали DS одной из самых необычных машин XX века.",
+    query:"Citroen DS history"
+  },
+
+  {
+    category:"USA",
+    title:"Как Mustang создал новый класс",
+    text:"Ford Mustang, представленный в 1964 году, объединил спортивный внешний вид, относительно доступную цену и возможность выбора различных двигателей. Именно это сочетание помогло сформировать класс pony car.",
+    query:"Ford Mustang 1964 history"
+  },
+
+  {
+    category:"UK",
+    title:"Lotus и философия лёгкости",
+    text:"Колин Чепмен и Lotus сделали снижение массы одним из главных принципов спортивного автомобиля. Эта идея прослеживается во многих моделях марки и особенно ярко проявилась в Elise.",
+    query:"Lotus Elise history"
+  },
+
+  {
+    category:"JAPAN",
+    title:"Honda NSX и новый взгляд на суперкар",
+    text:"Honda NSX показала, что среднемоторный автомобиль с характеристиками суперкара может быть удобным в обычной эксплуатации. При создании модели большое внимание уделялось массе, управляемости и качеству сборки.",
+    query:"Honda NSX history"
+  },
+
+  {
+    category:"RUSSIA",
+    title:"Волга как символ эпохи",
+    text:"ГАЗ-21 и ГАЗ-24 стали не просто транспортом, а частью визуального образа советской эпохи. Волги использовались государственными организациями, такси, службами и частными владельцами.",
+    query:"GAZ Volga history"
+  },
+
+  {
+    category:"SUPERCARS",
+    title:"Miura и рождение суперкара",
+    text:"Lamborghini Miura стала одним из автомобилей, закрепивших среднемоторную компоновку как основу для высокопроизводительных дорожных машин. Её появление оказало влияние на дизайн и инженерную архитектуру будущих суперкаров.",
+    query:"Lamborghini Miura history"
+  },
+
+  {
+    category:"TECH",
+    title:"Электромобиль выходит на новый уровень",
+    text:"Развитие аккумуляторов, силовой электроники и программного обеспечения изменило представление о возможностях электромобилей. Tesla Model S стала одним из заметных этапов этого перехода.",
+    query:"Tesla Model S history"
+  }
+
+];
+
+
+/* =========================================================
+   VISUAL LIBRARY
+========================================================= */
+
+const LIBRARY = [
+
+  ["BMW M3 E30","GERMANY","BMW M3 E30"],
+  ["Porsche 911 RS","GERMANY","Porsche 911 Carrera RS 2.7"],
+  ["Toyota Supra","JAPAN","Toyota Supra A80"],
+  ["Nissan GT-R","JAPAN","Nissan Skyline GT-R R34"],
+  ["Mazda RX-7","JAPAN","Mazda RX-7 FD"],
+  ["Honda NSX","JAPAN","Honda NSX"],
+  ["Lada Niva","RUSSIA","Lada Niva Legend"],
+  ["Lada 2107","RUSSIA","Lada 2107"],
+  ["GAZ-21 Volga","RUSSIA","GAZ-21 Volga"],
+  ["UAZ-469","RUSSIA","UAZ 469"],
+  ["Ferrari F40","ITALY","Ferrari F40"],
+  ["Lamborghini Miura","ITALY","Lamborghini Miura"],
+  ["Jaguar E-Type","UK","Jaguar E-Type"],
+  ["McLaren F1","UK","McLaren F1"],
+  ["Renault 5 Turbo","FRANCE","Renault 5 Turbo"],
+  ["Citroën DS","FRANCE","Citroen DS 1955"],
+  ["Ford Mustang","USA","Ford Mustang GT"],
+  ["Corvette C3","USA","Chevrolet Corvette C3"],
+  ["Audi Quattro","RALLY","Audi Quattro"],
+  ["Lancia Integrale","RALLY","Lancia Delta Integrale"],
+  ["Mercedes 300 SL","GERMANY","Mercedes Benz 300 SL Gullwing"],
+  ["Porsche 959","GERMANY","Porsche 959"],
+  ["Toyota AE86","JAPAN","Toyota AE86"],
+  ["Honda EK9","JAPAN","Honda Civic Type R EK9"]
+
+];
+
+
+/* =========================================================
+   ARCHIVE
+========================================================= */
+
+const ARCHIVE = [
+
+  {
+    code:"JDM",
+    title:"JDM",
+    description:"Японская автомобильная культура, спорткары, тюнинг и технологии.",
+    query:"Japanese sports cars"
+  },
+
+  {
+    code:"DE",
+    title:"German Engineering",
+    description:"Немецкая инженерия, спортивные седаны, Porsche, BMW, Mercedes-Benz и Audi.",
+    query:"German classic cars"
+  },
+
+  {
+    code:"SC",
+    title:"Supercars",
+    description:"Ferrari, Lamborghini, McLaren и автомобили, которые определили понятие суперкара.",
+    query:"classic supercars"
+  },
+
+  {
+    code:"MS",
+    title:"Motorsport",
+    description:"Ралли, кольцевые гонки, омологация и технологии автоспорта.",
+    query:"motorsport racing cars"
+  },
+
+  {
+    code:"RU",
+    title:"Russian Cars",
+    description:"Советские и российские автомобили: Lada, GAZ, UAZ, Moskvich, ZIL и Aurus.",
+    query:"Russian Soviet cars"
+  },
+
+  {
+    code:"FT",
+    title:"Future",
+    description:"Электромобили, новые технологии, автономность и будущее автомобиля.",
+    query:"future electric cars"
+  }
+
+];
+
+
+/* =========================================================
+   FALLBACK NEWS
+========================================================= */
+
+const FALLBACK_NEWS = [
+
+  {
+    category:"AUTOMOTIVE",
+    source:"ARCHIVE",
+    title:"Автомобиль продолжает меняться",
+    text:"Новые технологии постепенно меняют конструкцию, дизайн и характер современных автомобилей."
+  },
+
+  {
+    category:"MOTORSPORT",
+    source:"ARCHIVE",
+    title:"Технологии трассы приходят на дороги",
+    text:"Автоспорт продолжает оставаться испытательным полигоном для новых инженерных решений."
+  },
+
+  {
+    category:"DESIGN",
+    source:"ARCHIVE",
+    title:"Дизайн отражает свою эпоху",
+    text:"Автомобильный дизайн меняется вместе с технологиями, культурой и представлениями общества о будущем."
+  }
+
+];
+
+
+/* =========================================================
+   CONFIG
+========================================================= */
+
+const CONFIG = {
+
+  initialMachines:12,
+
+  machineStep:12,
+
+  initialLibrary:8,
+
+  libraryStep:8,
+
+  imageTimeout:7000,
+
+  wikiLimit:6,
+
+  maxImageQueue:3,
+
+  newsTimeout:6000
+
+};
+
+
+/* =========================================================
+   INTERNAL STATE
+========================================================= */
+
+const STATE = {
+
+  machineFilter:"ALL",
+
+  machineVisible:CONFIG.initialMachines,
+
+  libraryVisible:CONFIG.initialLibrary,
+
+  imageCache:new Map(),
+
+  imagePromises:new Map(),
+
+  imageQueue:[],
+
+  activeImageRequests:0,
+
+  machineModalToken:0,
+
+  newsLoaded:false
+
+};
+
+
+/* =========================================================
+   UTILS
+========================================================= */
+
+function escapeHTML(value){
+
+  return String(value ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+function normalize(value){
+
+  return String(value ?? "")
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g,"")
+    .replace(/ё/g,"е")
+    .replace(/[^a-zа-я0-9]+/gi," ")
+    .trim();
+
+}
+
+
+function sleep(ms){
+
+  return new Promise(resolve => setTimeout(resolve,ms));
+
+}
+
+
+function timeoutSignal(ms){
+
+  const controller = new AbortController();
+
+  const timer = setTimeout(() => {
+
+    controller.abort();
+
+  },ms);
+
+  return {
+    signal:controller.signal,
+    clear:() => clearTimeout(timer)
+  };
+
+}
+
+
+function hexToRgba(hex){
+
+  const clean = String(hex)
+    .replace("#","")
+    .trim();
+
+  const value = clean.length === 3
+    ? clean.split("").map(x => x+x).join("")
+    : clean;
+
+  const number = parseInt(value,16);
+
+  return [
+    ((number >> 16) & 255) / 255,
+    ((number >> 8) & 255) / 255,
+    (number & 255) / 255,
+    1
+  ];
+
+}
+
+
+function showToast(message){
+
+  const toast = document.getElementById("toast");
+
+  if(!toast) return;
+
+  toast.textContent = message;
+
+  toast.classList.add("show");
+
+  clearTimeout(showToast.timer);
+
+  showToast.timer = setTimeout(() => {
+
+    toast.classList.remove("show");
+
+  },2800);
+
+}
+
+
+/* =========================================================
+   IMAGE CACHE
+========================================================= */
+
+function imageCacheKey(query,count=1){
+
+  return `${normalize(query)}::${count}`;
+
+}
+
+
+/* =========================================================
+   WIKIMEDIA SEARCH
+========================================================= */
+
+async function fetchWikiImages(query,count=1){
+
+  const key = imageCacheKey(query,count);
+
+  if(STATE.imageCache.has(key)){
+
+    return STATE.imageCache.get(key);
+
+  }
+
+  if(STATE.imagePromises.has(key)){
+
+    return STATE.imagePromises.get(key);
+
+  }
+
+  const promise = (async() => {
+
+    try{
+
+      const params = new URLSearchParams({
+
+        action:"query",
+        generator:"search",
+        gsrsearch:`${query} filetype:bitmap`,
+        gsrnamespace:"6",
+        gsrlimit:String(Math.min(Math.max(count * 3,8),50)),
+        prop:"imageinfo",
+        iiprop:"url|mime",
+        iiurlwidth:"1200",
+        format:"json",
+        origin:"*"
+
+      });
+
+      const url =
+        "https://commons.wikimedia.org/w/api.php?" +
+        params.toString();
+
+      const request = timeoutSignal(CONFIG.imageTimeout);
+
+      const response = await fetch(url,{
+        signal:request.signal
+      });
+
+      request.clear();
+
+      if(!response.ok){
+
+        throw new Error("Wikimedia request failed");
+
+      }
+
+      const data = await response.json();
+
+      const pages = Object.values(
+        data?.query?.pages || {}
+      );
+
+      const target = normalize(query);
+
+      const scored = pages
+        .map(page => {
+
+          const title = normalize(
+            page?.title || ""
+          );
+
+          const info = page?.imageinfo?.[0];
+
+          if(!info?.thumburl && !info?.url){
+
+            return null;
+
+          }
+
+          let score = 0;
+
+          const targetWords = target
+            .split(" ")
+            .filter(word => word.length > 1);
+
+          for(const word of targetWords){
+
+            if(title.includes(word)){
+
+              score += 8;
+
+            }
+
+          }
+
+          if(title.includes(target)){
+
+            score += 25;
+
+          }
+
+          const badWords = [
+            "logo",
+            "flag",
+            "poster",
+            "map",
+            "interior",
+            "engine",
+            "wheel",
+            "rim",
+            "steering",
+            "dashboard",
+            "part",
+            "drawing",
+            "scale",
+            "model kit"
+          ];
+
+          for(const word of badWords){
+
+            if(title.includes(word)){
+
+              score -= 15;
+
+            }
+
+          }
+
+          return {
+
+            url:info.thumburl || info.url,
+
+            title:page.title || "",
+
+            score
+
+          };
+
+        })
+        .filter(Boolean)
+        .sort((a,b) => b.score - a.score);
+
+      const result = [];
+
+      const used = new Set();
+
+      for(const item of scored){
+
+        if(result.length >= count){
+
+          break;
+
+        }
+
+        if(used.has(item.url)){
+
+          continue;
+
+        }
+
+        used.add(item.url);
+
+        result.push(item.url);
+
+      }
+
+      STATE.imageCache.set(key,result);
+
+      return result;
+
+    }catch(error){
+
+      STATE.imageCache.set(key,[]);
+
+      return [];
+
+    }finally{
+
+      STATE.imagePromises.delete(key);
+
+    }
+
+  })();
+
+  STATE.imagePromises.set(key,promise);
+
+  return promise;
+
+}
+
+
+/* =========================================================
+   IMAGE QUEUE
+========================================================= */
+
+function processImageQueue(){
+
+  while(
+    STATE.activeImageRequests < CONFIG.maxImageQueue &&
+    STATE.imageQueue.length
+  ){
+
+    const task = STATE.imageQueue.shift();
+
+    STATE.activeImageRequests++;
+
+    Promise.resolve()
+      .then(task)
+      .catch(() => {})
+      .finally(() => {
+
+        STATE.activeImageRequests--;
+
+        processImageQueue();
+
+      });
+
+  }
+
+}
+
+
+function queueImageTask(task){
+
+  STATE.imageQueue.push(task);
+
+  processImageQueue();
+
+}
+
+
+/* =========================================================
+   LAZY IMAGE LOADER
+========================================================= */
+
+const imageObserver =
+  "IntersectionObserver" in window
+    ? new IntersectionObserver(
+        entries => {
+
+          for(const entry of entries){
+
+            if(!entry.isIntersecting){
+
+              continue;
+
+            }
+
+            const element = entry.target;
+
+            imageObserver.unobserve(element);
+
+            if(element.dataset.loaded === "1"){
+
+              continue;
+
+            }
+
+            const query = element.dataset.query;
+
+            const count =
+              Number(element.dataset.count || 1);
+
+            queueImageTask(async() => {
+
+              const images =
+                await fetchWikiImages(query,count);
+
+              if(images.length){
+
+                const first = images[0];
+
+                element.src = first;
+
+                element.onload = () => {
+
+                  element.classList.add("loaded");
+
+                };
+
+              }else{
+
+                element.classList.add("failed");
+
+              }
+
+              element.dataset.loaded = "1";
+
+            });
+
+          }
+
+        },
+        {
+          rootMargin:"500px 0px"
+        }
+      )
+    : null;
+
+
+function observeLazyImage(element){
+
+  if(!element) return;
+
+  if(imageObserver){
+
+    imageObserver.observe(element);
+
+  }else{
+
+    const query = element.dataset.query;
+
+    fetchWikiImages(query,1)
+      .then(images => {
+
+        if(images[0]){
+
+          element.src = images[0];
+
+          element.onload = () =>
+            element.classList.add("loaded");
+
+        }
+
+      });
+
+  }
+
+}
+
+
+/* =========================================================
+   MACHINE FILTERS
+========================================================= */
+
+function getMachineFilters(){
+
+  const countries = [
+    "ALL",
+    ...new Set(
+      MACHINES.map(machine => machine.country)
+    )
+  ];
+
+  return countries;
+
+}
+
+
+function renderMachineFilters(){
+
+  const container =
+    document.getElementById("machineFilters");
+
+  if(!container) return;
+
+  container.innerHTML =
+    getMachineFilters()
+      .map(filter => {
+
+        const active =
+          STATE.machineFilter === filter
+            ? "active"
+            : "";
+
+        return `
+          <button
+            type="button"
+            class="filter-btn ${active}"
+            data-filter="${escapeHTML(filter)}">
+            ${escapeHTML(filter)}
+          </button>
+        `;
+
+      })
+      .join("");
+
+}
+
+
+function getFilteredMachines(){
+
+  if(STATE.machineFilter === "ALL"){
+
+    return MACHINES;
+
+  }
+
+  return MACHINES.filter(
+    machine =>
+      machine.country === STATE.machineFilter
+  );
+
+}
+
+
+/* =========================================================
+   MACHINE CARD
+========================================================= */
+
+function machineCardHTML(machine,index){
+
+  return `
+
+    <article
+      class="machine-card reveal"
+      data-machine-index="${index}">
+
+      <div class="machine-image">
+
+        <div class="image-placeholder"></div>
+
+        <img
+          data-query="${escapeHTML(machine.imageQuery)}"
+          data-count="1"
+          alt="${escapeHTML(machine.name)}"
+          loading="lazy"
+          decoding="async">
+
+      </div>
+
+      <div class="machine-info">
+
+        <div class="machine-brand">
+          ${escapeHTML(machine.brand)}
+        </div>
+
+        <div class="machine-name">
+          ${escapeHTML(machine.name)}
+        </div>
+
+        <div class="machine-meta">
+
+          <span>${escapeHTML(machine.year)}</span>
+
+          <span>${escapeHTML(machine.type)}</span>
+
+          <span>${escapeHTML(machine.country)}</span>
+
+        </div>
+
+      </div>
+
+    </article>
+
+  `;
+
+}
+
+
+/* =========================================================
+   RENDER MACHINES
+========================================================= */
+
+function renderMachines(){
+
+  const grid =
+    document.getElementById("machineGrid");
+
+  const button =
+    document.getElementById("loadMachines");
+
+  if(!grid) return;
+
+  const machines =
+    getFilteredMachines();
+
+  const visible =
+    machines.slice(0,STATE.machineVisible);
+
+  grid.innerHTML =
+    visible
+      .map((machine,index) => {
+
+        const originalIndex =
+          MACHINES.indexOf(machine);
+
+        return machineCardHTML(
+          machine,
+          originalIndex
+        );
+
+      })
+      .join("");
+
+  grid
+    .querySelectorAll(".machine-image img")
+    .forEach(observeLazyImage);
+
+  if(button){
+
+    button.style.display =
+      STATE.machineVisible >= machines.length
+        ? "none"
+        : "inline-flex";
+
+  }
+
+  requestAnimationFrame(() => {
+
+    grid
+      .querySelectorAll(".reveal")
+      .forEach(element =>
+        revealObserver.observe(element)
+      );
+
+  });
+
+}
+
+
+/* =========================================================
+   LIBRARY CARD
+========================================================= */
+
+function libraryCardHTML(item,index){
+
+  const name = item[0];
+  const category = item[1];
+  const query = item[2];
+
+  return `
+
+    <article
+      class="library-card reveal"
+      data-library-index="${index}"
+      data-query="${escapeHTML(query)}">
+
+      <div class="image-placeholder"></div>
+
+      <img
+        data-query="${escapeHTML(query)}"
+        data-count="1"
+        alt="${escapeHTML(name)}"
+        loading="lazy"
+        decoding="async">
+
+      <div class="library-overlay">
+
+        <div class="library-category">
+          ${escapeHTML(category)}
+        </div>
+
+        <div class="library-name">
+          ${escapeHTML(name)}
+        </div>
+
+      </div>
+
+    </article>
+
+  `;
+
+}
+
+
+/* =========================================================
+   RENDER LIBRARY
+========================================================= */
+
+function renderLibrary(){
+
+  const grid =
+    document.getElementById("libraryGrid");
+
+  const button =
+    document.getElementById("loadLibrary");
+
+  if(!grid) return;
+
+  const visible =
+    LIBRARY.slice(0,STATE.libraryVisible);
+
+  grid.innerHTML =
+    visible
+      .map((item,index) =>
+        libraryCardHTML(item,index)
+      )
+      .join("");
+
+  grid
+    .querySelectorAll("img[data-query]")
+    .forEach(observeLazyImage);
+
+  if(button){
+
+    button.style.display =
+      STATE.libraryVisible >= LIBRARY.length
+        ? "none"
+        : "inline-flex";
+
+  }
+
+  requestAnimationFrame(() => {
+
+    grid
+      .querySelectorAll(".reveal")
+      .forEach(element =>
+        revealObserver.observe(element)
+      );
+
+  });
+
+}
+
+
+/* =========================================================
+   STORY CARD
+========================================================= */
+
+function storyCardHTML(story,index){
+
+  return `
+
+    <article
+      class="story-card reveal"
+      data-story-index="${index}">
+
+      <div class="story-number">
+        ${String(index + 1).padStart(2,"0")}
+      </div>
+
+      <div>
+
+        <div class="story-category">
+          ${escapeHTML(story.category)}
+        </div>
+
+        <h3>
+          ${escapeHTML(story.title)}
+        </h3>
+
+        <p>
+          ${escapeHTML(story.text.slice(0,150))}...
+        </p>
+
+      </div>
+
+    </article>
+
+  `;
+
+}
+
+
+/* =========================================================
+   RENDER STORIES
+========================================================= */
+
+function renderStories(){
+
+  const grid =
+    document.getElementById("storiesGrid");
+
+  if(!grid) return;
+
+  grid.innerHTML =
+    STORIES
+      .map((story,index) =>
+        storyCardHTML(story,index)
+      )
+      .join("");
+
+  grid
+    .querySelectorAll(".story-card")
+    .forEach(card =>
+      revealObserver.observe(card)
+    );
+
+}
+
+
+/* =========================================================
+   ARCHIVE CARD
+========================================================= */
+
+function archiveCardHTML(item,index){
+
+  return `
+
+    <article
+      class="archive-card reveal"
+      data-archive-index="${index}">
+
+      <div class="archive-code">
+        ${escapeHTML(item.code)}
+      </div>
+
+      <div>
+
+        <h3>
+          ${escapeHTML(item.title)}
+        </h3>
+
+        <p>
+          ${escapeHTML(item.description)}
+        </p>
+
+      </div>
+
+    </article>
+
+  `;
+
+}
+
+
+/* =========================================================
+   RENDER ARCHIVE
+========================================================= */
+
+function renderArchive(){
+
+  const grid =
+    document.getElementById("archiveGrid");
+
+  if(!grid) return;
+
+  grid.innerHTML =
+    ARCHIVE
+      .map((item,index) =>
+        archiveCardHTML(item,index)
+      )
+      .join("");
+
+  grid
+    .querySelectorAll(".archive-card")
+    .forEach(card =>
+      revealObserver.observe(card)
+    );
+
+}
+
+
+/* =========================================================
+   LATEST
+========================================================= */
+
+const LATEST_INDEXES = [
+  0,
+  6,
+  35
+];
+
+
+function latestCardHTML(machine,index){
+
+  return `
+
+    <article
+      class="latest-card reveal"
+      data-machine-index="${index}">
+
+      <div class="image-placeholder"></div>
+
+      <img
+        class="latest-card-image"
+        data-query="${escapeHTML(machine.imageQuery)}"
+        data-count="1"
+        alt="${escapeHTML(machine.name)}"
+        loading="lazy"
+        decoding="async">
+
+      <div class="latest-card-content">
+
+        <div class="latest-tag">
+          ${escapeHTML(machine.brand)}
+        </div>
+
+        <h3>
+          ${escapeHTML(machine.name)}
+        </h3>
+
+        <p>
+          ${escapeHTML(machine.year)}
+          /
+          ${escapeHTML(machine.type)}
+        </p>
+
+      </div>
+
+    </article>
+
+  `;
+
+}
+
+
+function renderLatest(){
+
+  const grid =
+    document.getElementById("latestGrid");
+
+  if(!grid) return;
+
+  grid.innerHTML =
+    LATEST_INDEXES
+      .map(index => {
+
+        const machine =
+          MACHINES[index];
+
+        return machine
+          ? latestCardHTML(machine,index)
+          : "";
+
+      })
+      .join("");
+
+  grid
+    .querySelectorAll("img[data-query]")
+    .forEach(observeLazyImage);
+
+  grid
+    .querySelectorAll(".reveal")
+    .forEach(element =>
+      revealObserver.observe(element)
+    );
+
+}
+
+
+/* =========================================================
+   NEWS FALLBACK
+========================================================= */
+
+function renderFallbackNews(){
+
+  const list =
+    document.getElementById("newsList");
+
+  const feature =
+    document.getElementById("newsFeatureTitle");
+
+  if(!list) return;
+
+  const first =
+    FALLBACK_NEWS[0];
+
+  if(feature && first){
+
+    feature.textContent =
+      first.title;
+
+  }
+
+  list.innerHTML =
+    FALLBACK_NEWS
+      .slice(1)
+      .map(item => `
+
+        <article class="news-item reveal">
+
+          <div class="news-item-top">
+
+            <span>
+              ${escapeHTML(item.category)}
+            </span>
+
+            <span>
+              ${escapeHTML(item.source)}
+            </span>
+
+          </div>
+
+          <h4>
+            ${escapeHTML(item.title)}
+          </h4>
+
+        </article>
+
+      `)
+      .join("");
+
+  list
+    .querySelectorAll(".reveal")
+    .forEach(element =>
+      revealObserver.observe(element)
+    );
+
+}
+</script>
+<script>
+/* =========================================================
+   REVEAL OBSERVER
+========================================================= */
+
+const revealObserver =
+  "IntersectionObserver" in window
+    ? new IntersectionObserver(
+        entries => {
+
+          entries.forEach(entry => {
+
+            if(entry.isIntersecting){
+
+              entry.target.classList.add("visible");
+
+              revealObserver.unobserve(
+                entry.target
+              );
+
+            }
+
+          });
+
+        },
+        {
+          threshold:.08,
+          rootMargin:"0px 0px -40px 0px"
+        }
+      )
+    : {
+        observe(element){
+          element.classList.add("visible");
+        },
+        unobserve(){}
+      };
+
+
+/* =========================================================
+   SCROLL PROGRESS
+========================================================= */
+
+function updateScrollProgress(){
+
+  const progress =
+    document.getElementById("scrollProgress");
+
+  if(!progress) return;
+
+  const scrollTop =
+    window.scrollY || document.documentElement.scrollTop;
+
+  const documentHeight =
+    document.documentElement.scrollHeight -
+    window.innerHeight;
+
+  const percent =
+    documentHeight > 0
+      ? (scrollTop / documentHeight) * 100
+      : 0;
+
+  progress.style.width =
+    `${Math.min(100,Math.max(0,percent))}%`;
+
+}
+
+
+/* =========================================================
+   HEADER / MOBILE MENU
+========================================================= */
+
+const mobileButton =
+  document.getElementById("mobileButton");
+
+const mobilePanel =
+  document.getElementById("mobilePanel");
+
+
+function closeMobileMenu(){
+
+  if(!mobilePanel) return;
+
+  mobilePanel.classList.remove("open");
+
+  if(mobileButton){
+
+    mobileButton.setAttribute(
+      "aria-expanded",
+      "false"
+    );
+
+  }
+
+}
+
+
+function toggleMobileMenu(){
+
+  if(!mobilePanel) return;
+
+  const open =
+    mobilePanel.classList.toggle("open");
+
+  if(mobileButton){
+
+    mobileButton.setAttribute(
+      "aria-expanded",
+      String(open)
+    );
+
+  }
+
+}
+
+
+if(mobileButton){
+
+  mobileButton.addEventListener(
+    "click",
+    toggleMobileMenu
+  );
+
+}
+
+
+document
+  .querySelectorAll(".mobile-nav a")
+  .forEach(link => {
+
+    link.addEventListener(
+      "click",
+      closeMobileMenu
+    );
+
+  });
+
+
+/* =========================================================
+   SEARCH
+========================================================= */
+
+const searchButton =
+  document.getElementById("searchButton");
+
+const searchOverlay =
+  document.getElementById("searchOverlay");
+
+const searchClose =
+  document.getElementById("searchClose");
+
+const searchInput =
+  document.getElementById("searchInput");
+
+const searchResults =
+  document.getElementById("searchResults");
+
+
+function openSearch(){
+
+  if(!searchOverlay) return;
+
+  searchOverlay.classList.add("open");
+
+  document.body.classList.add("no-scroll");
+
+  setTimeout(() => {
+
+    searchInput?.focus();
+
+  },150);
+
+}
+
+
+function closeSearch(){
+
+  if(!searchOverlay) return;
+
+  searchOverlay.classList.remove("open");
+
+  document.body.classList.remove("no-scroll");
+
+}
+
+
+if(searchButton){
+
+  searchButton.addEventListener(
+    "click",
+    openSearch
+  );
+
+}
+
+
+if(searchClose){
+
+  searchClose.addEventListener(
+    "click",
+    closeSearch
+  );
+
+}
+
+
+function searchMachines(value){
+
+  const query =
+    normalize(value);
+
+  if(!query){
+
+    searchResults.innerHTML = "";
+
+    return;
+
+  }
+
+  const words =
+    query
+      .split(" ")
+      .filter(Boolean);
+
+  const results =
+    MACHINES
+      .map((machine,index) => {
+
+        const haystack =
+          normalize([
+            machine.brand,
+            machine.name,
+            machine.year,
+            machine.type,
+            machine.country,
+            machine.engine,
+            machine.drive
+          ].join(" "));
+
+        let score = 0;
+
+        words.forEach(word => {
+
+          if(haystack.includes(word)){
+
+            score += 1;
+
+          }
+
+        });
+
+        if(
+          normalize(machine.name)
+            .includes(query)
+        ){
+
+          score += 5;
+
+        }
+
+        if(
+          normalize(machine.brand)
+            .includes(query)
+        ){
+
+          score += 3;
+
+        }
+
+        return {
+          machine,
+          index,
+          score
+        };
+
+      })
+      .filter(item => item.score > 0)
+      .sort((a,b) => b.score - a.score)
+      .slice(0,10);
+
+  if(!results.length){
+
+    searchResults.innerHTML = `
+
+      <div class="search-result">
+
+        <div class="search-result-name">
+          Ничего не найдено
+        </div>
+
+      </div>
+
+    `;
+
+    return;
+
+  }
+
+  searchResults.innerHTML =
+    results
+      .map(item => `
+
+        <div
+          class="search-result"
+          data-search-index="${item.index}">
+
+          <div>
+
+            <div class="search-result-name">
+              ${escapeHTML(item.machine.name)}
+            </div>
+
+            <div class="search-result-meta">
+              ${escapeHTML(item.machine.brand)}
+              /
+              ${escapeHTML(item.machine.year)}
+            </div>
+
+          </div>
+
+          <div class="search-result-meta">
+            ${escapeHTML(item.machine.country)}
+          </div>
+
+        </div>
+
+      `)
+      .join("");
+
+}
+
+
+if(searchInput){
+
+  searchInput.addEventListener(
+    "input",
+    event => {
+
+      searchMachines(
+        event.target.value
+      );
+
+    }
+  );
+
+}
+
+
+if(searchResults){
+
+  searchResults.addEventListener(
+    "click",
+    event => {
+
+      const result =
+        event.target.closest(
+          "[data-search-index]"
+        );
+
+      if(!result) return;
+
+      const index =
+        Number(
+          result.dataset.searchIndex
+        );
+
+      closeSearch();
+
+      openMachineModal(index);
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   MACHINE FILTER EVENTS
+========================================================= */
+
+const machineFilters =
+  document.getElementById("machineFilters");
+
+
+if(machineFilters){
+
+  machineFilters.addEventListener(
+    "click",
+    event => {
+
+      const button =
+        event.target.closest(
+          ".filter-btn"
+        );
+
+      if(!button) return;
+
+      STATE.machineFilter =
+        button.dataset.filter || "ALL";
+
+      STATE.machineVisible =
+        CONFIG.initialMachines;
+
+      renderMachineFilters();
+
+      renderMachines();
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   LOAD MORE MACHINES
+========================================================= */
+
+const loadMachines =
+  document.getElementById("loadMachines");
+
+
+if(loadMachines){
+
+  loadMachines.addEventListener(
+    "click",
+    () => {
+
+      STATE.machineVisible +=
+        CONFIG.machineStep;
+
+      renderMachines();
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   LOAD MORE LIBRARY
+========================================================= */
+
+const loadLibrary =
+  document.getElementById("loadLibrary");
+
+
+if(loadLibrary){
+
+  loadLibrary.addEventListener(
+    "click",
+    () => {
+
+      STATE.libraryVisible +=
+        CONFIG.libraryStep;
+
+      renderLibrary();
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   MACHINE MODAL
+========================================================= */
+
+const machineModal =
+  document.getElementById("machineModal");
+
+const machineModalClose =
+  document.getElementById("machineModalClose");
+
+const modalMachineBrand =
+  document.getElementById("modalMachineBrand");
+
+const modalMachineTitle =
+  document.getElementById("modalMachineTitle");
+
+const modalMachineStory =
+  document.getElementById("modalMachineStory");
+
+const modalMachineSpecs =
+  document.getElementById("modalMachineSpecs");
+
+const machineModalGallery =
+  document.getElementById(
+    "machineModalGallery"
+  );
+
+
+function openModal(element){
+
+  if(!element) return;
+
+  element.classList.add("open");
+
+  document.body.classList.add(
+    "no-scroll"
+  );
+
+}
+
+
+function closeModal(element){
+
+  if(!element) return;
+
+  element.classList.remove("open");
+
+  document.body.classList.remove(
+    "no-scroll"
+  );
+
+}
+
+
+async function openMachineModal(index){
+
+  const machine =
+    MACHINES[index];
+
+  if(!machine) return;
+
+  const token =
+    ++STATE.machineModalToken;
+
+  STATE.activeMachineIndex =
+    index;
+
+  modalMachineBrand.textContent =
+    `${machine.brand} / ${machine.country}`;
+
+  modalMachineTitle.textContent =
+    machine.name;
+
+  modalMachineStory.textContent =
+    machine.story;
+
+  modalMachineSpecs.innerHTML = `
+
+    <div class="spec">
+      <div class="spec-label">Year</div>
+      <div class="spec-value">
+        ${escapeHTML(machine.year)}
+      </div>
+    </div>
+
+    <div class="spec">
+      <div class="spec-label">Engine</div>
+      <div class="spec-value">
+        ${escapeHTML(machine.engine)}
+      </div>
+    </div>
+
+    <div class="spec">
+      <div class="spec-label">Power</div>
+      <div class="spec-value">
+        ${escapeHTML(machine.power)}
+      </div>
+    </div>
+
+    <div class="spec">
+      <div class="spec-label">Drive</div>
+      <div class="spec-value">
+        ${escapeHTML(machine.drive)}
+      </div>
+    </div>
+
+    <div class="spec">
+      <div class="spec-label">Type</div>
+      <div class="spec-value">
+        ${escapeHTML(machine.type)}
+      </div>
+    </div>
+
+    <div class="spec">
+      <div class="spec-label">Country</div>
+      <div class="spec-value">
+        ${escapeHTML(machine.country)}
+      </div>
+    </div>
+
+  `;
+
+  machineModalGallery.innerHTML = `
+
+    <div class="image-placeholder"></div>
+
+  `;
+
+  openModal(machineModal);
+
+  const images =
+    await fetchWikiImages(
+      machine.imageQuery,
+      4
+    );
+
+  if(
+    token !== STATE.machineModalToken
+  ){
+
+    return;
+
+  }
+
+  if(!images.length){
+
+    machineModalGallery.innerHTML = `
+
+      <div class="image-placeholder"></div>
+
+    `;
+
+    return;
+
+  }
+
+  /*
+   * Для быстрого модального окна используем
+   * первую найденную фотографию.
+   * Остальные URL сохраняются в data-images
+   * для возможности расширения галереи.
+   */
+
+  machineModalGallery.innerHTML = `
+
+    <img
+      src="${escapeHTML(images[0])}"
+      alt="${escapeHTML(machine.name)}"
+      loading="eager"
+      decoding="async">
+
+  `;
+
+  const image =
+    machineModalGallery.querySelector("img");
+
+  if(image){
+
+    image.onerror = () => {
+
+      image.remove();
+
+      machineModalGallery.innerHTML = `
+
+        <div class="image-placeholder"></div>
+
+      `;
+
+    };
+
+  }
+
+}
+
+
+function closeMachineModal(){
+
+  ++STATE.machineModalToken;
+
+  closeModal(machineModal);
+
+  STATE.activeMachineIndex =
+    null;
+
+}
+
+
+if(machineModalClose){
+
+  machineModalClose.addEventListener(
+    "click",
+    closeMachineModal
+  );
+
+}
+
+
+if(machineModal){
+
+  machineModal.addEventListener(
+    "click",
+    event => {
+
+      if(
+        event.target === machineModal
+      ){
+
+        closeMachineModal();
+
+      }
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   MACHINE CARD CLICK
+========================================================= */
+
+const machineGrid =
+  document.getElementById("machineGrid");
+
+
+if(machineGrid){
+
+  machineGrid.addEventListener(
+    "click",
+    event => {
+
+      const card =
+        event.target.closest(
+          "[data-machine-index]"
+        );
+
+      if(!card) return;
+
+      const index =
+        Number(
+          card.dataset.machineIndex
+        );
+
+      openMachineModal(index);
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   LATEST CARD CLICK
+========================================================= */
+
+const latestGrid =
+  document.getElementById("latestGrid");
+
+
+if(latestGrid){
+
+  latestGrid.addEventListener(
+    "click",
+    event => {
+
+      const card =
+        event.target.closest(
+          "[data-machine-index]"
+        );
+
+      if(!card) return;
+
+      openMachineModal(
+        Number(card.dataset.machineIndex)
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   STORY MODAL
+========================================================= */
+
+const storyModal =
+  document.getElementById("storyModal");
+
+const storyModalClose =
+  document.getElementById("storyModalClose");
+
+const storyModalCategory =
+  document.getElementById(
+    "storyModalCategory"
+  );
+
+const storyModalTitle =
+  document.getElementById(
+    "storyModalTitle"
+  );
+
+const storyModalText =
+  document.getElementById(
+    "storyModalText"
+  );
+
+
+function openStoryModal(index){
+
+  const story =
+    STORIES[index];
+
+  if(!story) return;
+
+  storyModalCategory.textContent =
+    story.category;
+
+  storyModalTitle.textContent =
+    story.title;
+
+  storyModalText.textContent =
+    story.text;
+
+  openModal(storyModal);
+
+}
+
+
+function closeStoryModal(){
+
+  closeModal(storyModal);
+
+}
+
+
+if(storyModalClose){
+
+  storyModalClose.addEventListener(
+    "click",
+    closeStoryModal
+  );
+
+}
+
+
+if(storyModal){
+
+  storyModal.addEventListener(
+    "click",
+    event => {
+
+      if(
+        event.target === storyModal
+      ){
+
+        closeStoryModal();
+
+      }
+
+    }
+  );
+
+}
+
+
+const storiesGrid =
+  document.getElementById("storiesGrid");
+
+
+if(storiesGrid){
+
+  storiesGrid.addEventListener(
+    "click",
+    event => {
+
+      const card =
+        event.target.closest(
+          "[data-story-index]"
+        );
+
+      if(!card) return;
+
+      openStoryModal(
+        Number(card.dataset.storyIndex)
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   ARCHIVE
+========================================================= */
+
+const archiveGrid =
+  document.getElementById("archiveGrid");
+
+
+if(archiveGrid){
+
+  archiveGrid.addEventListener(
+    "click",
+    event => {
+
+      const card =
+        event.target.closest(
+          "[data-archive-index]"
+        );
+
+      if(!card) return;
+
+      const index =
+        Number(
+          card.dataset.archiveIndex
+        );
+
+      const archive =
+        ARCHIVE[index];
+
+      if(!archive) return;
+
+      const matchingMachines =
+        MACHINES.filter(machine =>
+          normalize(
+            machine.country
+          ).includes(
+            normalize(archive.title)
+          )
+        );
+
+      /*
+       * Если для архива нет прямого фильтра,
+       * показываем уведомление и переводим
+       * пользователя в каталог.
+       */
+
+      showToast(
+        `${archive.title} / ${archive.description}`
+      );
+
+      document
+        .getElementById("machines")
+        ?.scrollIntoView({
+          behavior:
+            window.matchMedia(
+              "(prefers-reduced-motion: reduce)"
+            ).matches
+              ? "auto"
+              : "smooth"
+        });
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   ESC KEY
+========================================================= */
+
+document.addEventListener(
+  "keydown",
+  event => {
+
+    if(event.key !== "Escape") return;
+
+    closeSearch();
+
+    closeMobileMenu();
+
+    closeMachineModal();
+
+    closeStoryModal();
+
+  }
+);
+
+
+/* =========================================================
+   CLICK OUTSIDE SEARCH
+========================================================= */
+
+if(searchOverlay){
+
+  searchOverlay.addEventListener(
+    "click",
+    event => {
+
+      if(
+        event.target === searchOverlay
+      ){
+
+        closeSearch();
+
+      }
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   3D MODEL
+========================================================= */
+
+const carModel =
+  document.getElementById("carModel");
+
+const modelStatus =
+  document.getElementById("modelStatus");
+
+
+let originalMaterials = [];
+
+
+function setupModelViewer(){
+
+  if(!carModel){
+
+    return;
+
+  }
+
+  const setStatus = message => {
+
+    if(modelStatus){
+
+      modelStatus.textContent =
+        message;
+
+    }
+
+  };
+
+
+  carModel.addEventListener(
+    "load",
+    () => {
+
+      setStatus(
+        "MODEL / READY"
+      );
+
+      originalMaterials = [];
+
+      try{
+
+        const materials =
+          carModel.model?.materials || [];
+
+        materials.forEach(
+          material => {
+
+            let color = [
+              1,
+              1,
+              1,
+              1
+            ];
+
+            try{
+
+              const factor =
+                material.pbrMetallicRoughness
+                  ?.baseColorFactor;
+
+              if(
+                Array.isArray(factor) &&
+                factor.length >= 4
+              ){
+
+                color = [
+                  factor[0],
+                  factor[1],
+                  factor[2],
+                  factor[3]
+                ];
+
+              }
+
+            }catch(error){}
+
+            originalMaterials.push({
+              material,
+              color,
+              name:
+                String(
+                  material.name || ""
+                ).toLowerCase()
+            });
+
+          }
+        );
+
+      }catch(error){
+
+        originalMaterials = [];
+
+      }
+
+    }
+  );
+
+
+  carModel.addEventListener(
+    "error",
+    () => {
+
+      setStatus(
+        "MODEL / FILE NOT FOUND"
+      );
+
+    }
+  );
+
+
+  if(
+    customElements &&
+    customElements.whenDefined
+  ){
+
+    Promise.race([
+
+      customElements.whenDefined(
+        "model-viewer"
+      ),
+
+      sleep(5000)
+
+    ]).catch(() => {});
+
+  }
+
+}
+
+
+setupModelViewer();
+
+
+/* =========================================================
+   SAFE MATERIAL RECOLORING
+========================================================= */
+
+function materialCanBePainted(name){
+
+  const blocked = [
+
+    "glass",
+    "window",
+    "windshield",
+    "tyre",
+    "tire",
+    "rubber",
+    "wheel",
+    "brake",
+    "disc",
+    "interior",
+    "seat",
+    "dashboard",
+    "steering",
+    "chrome",
+    "mirror",
+    "light",
+    "lamp",
+    "headlight",
+    "taillight",
+    "plastic black"
+
+  ];
+
+  return !blocked.some(
+    word => name.includes(word)
+  );
+
+}
+
+
+function applyCarColor(color){
+
+  if(!originalMaterials.length){
+
+    showToast(
+      "3D-модель ещё не загрузилась"
+    );
+
+    return;
+
+  }
+
+  const rgba =
+    hexToRgba(color);
+
+  let changed = 0;
+
+  originalMaterials.forEach(item => {
+
+    if(
+      !materialCanBePainted(
+        item.name
+      )
+    ){
+
+      return;
+
+    }
+
+    try{
+
+      const pbr =
+        item.material
+          .pbrMetallicRoughness;
+
+      if(!pbr){
+
+        return;
+
+      }
+
+      pbr.setBaseColorFactor(
+        rgba
+      );
+
+      changed++;
+
+    }catch(error){}
+
+  });
+
+  if(changed){
+
+    showToast(
+      "Цвет кузова изменён"
+    );
+
+  }else{
+
+    showToast(
+      "У модели нет доступного материала кузова"
+    );
+
+  }
+
+}
+
+
+document
+  .querySelectorAll(".paint-button")
+  .forEach(button => {
+
+    button.addEventListener(
+      "click",
+      () => {
+
+        document
+          .querySelectorAll(
+            ".paint-button"
+          )
+          .forEach(item =>
+            item.classList.remove("active")
+          );
+
+        button.classList.add("active");
+
+        applyCarColor(
+          button.dataset.color
+        );
+
+      }
+    );
+
+  });
+
+
+/* =========================================================
+   MODEL ROTATION
+========================================================= */
+
+if(carModel){
+
+  carModel.addEventListener(
+    "pointerdown",
+    () => {
+
+      carModel.setAttribute(
+        "auto-rotate",
+        ""
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   CONTACT FORM
+========================================================= */
+
+const contactForm =
+  document.getElementById(
+    "contactForm"
+  );
+
+
+if(contactForm){
+
+  contactForm.addEventListener(
+    "submit",
+    event => {
+
+      event.preventDefault();
+
+      const name =
+        document
+          .getElementById("contactName")
+          ?.value
+          .trim();
+
+      const email =
+        document
+          .getElementById("contactEmail")
+          ?.value
+          .trim();
+
+      const message =
+        document
+          .getElementById("contactMessage")
+          ?.value
+          .trim();
+
+      if(!name || !email || !message){
+
+        showToast(
+          "Заполните все поля"
+        );
+
+        return;
+
+      }
+
+      const subject =
+        encodeURIComponent(
+          "BGDN MOTION — предложение"
+        );
+
+      const body =
+        encodeURIComponent(
+          `Имя: ${name}\nEmail: ${email}\n\n${message}`
+        );
+
+      /*
+       * Замени email ниже на свой.
+       */
+
+      const targetEmail =
+        "your@email.com";
+
+      window.location.href =
+        `mailto:${targetEmail}?subject=${subject}&body=${body}`;
+
+      showToast(
+        "Открываем почтовое приложение"
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================================================
+   NEWS
+========================================================= */
+
+function parseRSS(xmlText){
+
+  try{
+
+    const parser =
+      new DOMParser();
+
+    const xml =
+      parser.parseFromString(
+        xmlText,
+        "text/xml"
+      );
+
+    const items =
+      Array.from(
+        xml.querySelectorAll(
+          "item"
+        )
+      );
+
+    return items
+      .slice(0,6)
+      .map(item => {
+
+        const title =
+          item.querySelector(
+            "title"
+          )?.textContent
+          ?.trim();
+
+        const description =
+          item.querySelector(
+            "description"
+          )?.textContent
+          ?.replace(/<[^>]*>/g,"")
+          ?.trim();
+
+        return {
+
+          title:
+            title || "Automotive news",
+
+          description:
+            description || "",
+
+          category:"AUTOMOTIVE",
+
+          source:"LIVE"
+
+        };
+
+      })
+      .filter(item => item.title);
+
+  }catch(error){
+
+    return [];
+
+  }
+
+}
+
+
+async function loadNews(){
+
+  if(STATE.newsLoaded){
+
+    return;
+
+  }
+
+  const list =
+    document.getElementById(
+      "newsList"
+    );
+
+  const feature =
+    document.getElementById(
+      "newsFeatureTitle"
+    );
+
+  if(!list) return;
+
+  const rss =
+    "https://news.google.com/rss/search?q=" +
+    encodeURIComponent(
+      "automotive cars motorsport"
+    ) +
+    "&hl=en-US&gl=US&ceid=US:en";
+
+  const proxy =
+    "https://api.allorigins.win/raw?url=" +
+    encodeURIComponent(rss);
+
+  try{
+
+    const request =
+      timeoutSignal(
+        CONFIG.newsTimeout
+      );
+
+    const response =
+      await fetch(proxy,{
+        signal:request.signal
+      });
+
+    request.clear();
+
+    if(!response.ok){
+
+      throw new Error(
+        "News request failed"
+      );
+
+    }
+
+    const xml =
+      await response.text();
+
+    const news =
+      parseRSS(xml);
+
+    if(!news.length){
+
+      throw new Error(
+        "No news"
+      );
+
+    }
+
+    STATE.newsLoaded = true;
+
+    if(feature){
+
+      feature.textContent =
+        news[0].title;
+
+    }
+
+    list.innerHTML =
+      news
+        .slice(1)
+        .map(item => `
+
+          <article class="news-item reveal">
+
+            <div class="news-item-top">
+
+              <span>
+                ${escapeHTML(item.category)}
+              </span>
+
+              <span>
+                LIVE
+              </span>
+
+            </div>
+
+            <h4>
+              ${escapeHTML(item.title)}
+            </h4>
+
+          </article>
+
+        `)
+        .join("");
+
+    list
+      .querySelectorAll(".reveal")
+      .forEach(element =>
+        revealObserver.observe(element)
+      );
+
+  }catch(error){
+
+    renderFallbackNews();
+
+  }
+
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+function updateStats(){
+
+  const machines =
+    document.getElementById(
+      "statMachines"
+    );
+
+  const stories =
+    document.getElementById(
+      "statStories"
+    );
+
+  if(machines){
+
+    machines.textContent =
+      MACHINES.length;
+
+  }
+
+  if(stories){
+
+    stories.textContent =
+      STORIES.length;
+
+  }
+
+}
+
+
+/* =========================================================
+   FOOTER YEAR
+========================================================= */
+
+function updateFooterYear(){
+
+  const element =
+    document.getElementById(
+      "footerYear"
+    );
+
+  if(element){
+
+    element.textContent =
+      new Date().getFullYear();
+
+  }
+
+}
+
+
+/* =========================================================
+   INITIAL RENDER
+========================================================= */
+
+function initializeSite(){
+
+  renderMachineFilters();
+
+  renderLatest();
+
+  renderMachines();
+
+  renderLibrary();
+
+  renderStories();
+
+  renderArchive();
+
+  renderFallbackNews();
+
+  updateStats();
+
+  updateFooterYear();
+
+  window.setTimeout(
+    loadNews,
+    1800
+  );
+
+}
+
+
+/* =========================================================
+   INITIAL REVEALS
+========================================================= */
+
+document
+  .querySelectorAll(".reveal")
+  .forEach(element =>
+    revealObserver.observe(element)
+  );
+
+
+/* =========================================================
+   SCROLL EVENTS
+========================================================= */
+
+window.addEventListener(
+  "scroll",
+  updateScrollProgress,
+  {
+    passive:true
+  }
+);
+
+
+/* =========================================================
+   RESIZE
+========================================================= */
+
+let resizeTimer = null;
+
+window.addEventListener(
+  "resize",
+  () => {
+
+    clearTimeout(resizeTimer);
+
+    resizeTimer =
+      setTimeout(() => {
+
+        updateScrollProgress();
+
+      },150);
+
+  },
+  {
+    passive:true
+  }
+);
+
+
+/* =========================================================
+   PAGE LOAD
+========================================================= */
+
+if(
+  document.readyState === "loading"
+){
+
+  document.addEventListener(
+    "DOMContentLoaded",
+    initializeSite,
+    {
+      once:true
+    }
+  );
+
+}else{
+
+  initializeSite();
+
+}
+
+
+/* =========================================================
+   LOADER
+========================================================= */
+
+window.addEventListener(
+  "load",
+  () => {
+
+    const loader =
+      document.getElementById(
+        "loader"
+      );
+
+    if(!loader) return;
+
+    setTimeout(() => {
+
+      loader.classList.add(
+        "hidden"
+      );
+
+    },350);
+
+  }
+);
+
+
+/* =========================================================
+   FALLBACK LOADER
+========================================================= */
+
+setTimeout(() => {
+
+  const loader =
+    document.getElementById(
+      "loader"
+    );
+
+  if(loader){
+
+    loader.classList.add(
+      "hidden"
+    );
+
+  }
+
+},4500);
+
+
+/* =========================================================
+   SMOOTH ANCHOR SCROLL
+========================================================= */
+
+document
+  .querySelectorAll(
+    'a[href^="#"]'
+  )
+  .forEach(link => {
+
+    link.addEventListener(
+      "click",
+      event => {
+
+        const href =
+          link.getAttribute("href");
+
+        if(
+          !href ||
+          href === "#"
+        ){
+
+          return;
+
+        }
+
+        const target =
+          document.querySelector(
+            href
+          );
+
+        if(!target){
+
+          return;
+
+        }
+
+        event.preventDefault();
+
+        closeMobileMenu();
+
+        target.scrollIntoView({
+          behavior:
+            window.matchMedia(
+              "(prefers-reduced-motion: reduce)"
+            ).matches
+              ? "auto"
+              : "smooth",
+          block:"start"
+        });
+
+      }
+    );
+
+  });
+
+
+/* =========================================================
+   PREVENT BROKEN IMAGE ICONS
+========================================================= */
+
+document.addEventListener(
+  "error",
+  event => {
+
+    const target =
+      event.target;
+
+    if(
+      target instanceof HTMLImageElement
+    ){
+
+      target.style.background =
+        "#0d0d0d";
+
+    }
+
+  },
+  true
+);
+
+
+/* =========================================================
+   FIRST SCROLL UPDATE
+========================================================= */
+
+updateScrollProgress();
+
+</script>
+/* =========================
+   FINAL SITE BOOT
+========================= */
+
+(async function boot(){
+  try{
+    updateScrollProgress();
+    updateStats();
+
+    await Promise.allSettled([
+      renderLatest(),
+      renderMachines(),
+      renderLibrary(),
+      renderStories(),
+      renderArchive(),
+      loadNews()
+    ]);
+
+    initMotionViewer();
+    initRevealObserver();
+    initSmoothAnchors();
+
+    document.documentElement.classList.add("site-ready");
+  }catch(error){
+    console.error("BGDN MOTION boot error:", error);
+    document.documentElement.classList.add("site-ready");
+  }
+})();
+
+</script>
+
+</body>
+</html>
